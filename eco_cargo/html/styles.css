@@ -1,0 +1,899 @@
+html, body {
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: 'Play', sans-serif;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent !important;
+    height: calc(100% - 10px);
+    min-height: calc(100% - 10px);
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #fdfdfd;
+    user-select: none;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+.material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.material-icons.md-light {
+    color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+a {
+    color: #fdfdfd;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: max-content;
+    text-align: left;
+}
+
+.pageWrapper {
+    display: none;
+    max-width: 1200px;
+    min-width: 800px;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    background-color: #3a576a;
+    overflow: auto;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    display: block;
+    justify-content: center;
+    background: #06263f url("img/eco_cargo.png") no-repeat top left;
+    background-size: contain;
+}
+
+.btnClose {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    text-decoration: none;
+    background-color: #e31837;
+    font-weight: bold;
+}
+
+.headInformation {
+
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-weight: bold;
+}
+
+.header h1 {
+    font-size: 22px;
+    text-align: center;
+    margin: 0;
+    line-height: 80px;
+}
+
+.header .logo {
+    width: 80%;
+    max-height: 50%;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+/* background-color: #1d3d53;
+background: #6699ff;
+	background-image: linear-gradient(to bottom, #6699ff, #4d88ff);
+*/
+
+.btn, .btn2, .btn3 {
+
+    border: none;
+    font-size: 1.0em;
+    margin: 10px 0;
+    padding: 5px 10px;
+}
+
+.btn {
+
+    background-color: #edc054;
+    color: #303030;
+}
+
+.btn2 {
+
+    background-color: #fdf9ec;
+    color: #303030;
+}
+
+.btn3 {
+
+    background-color: #f40827;
+    color: #fdf9ec;
+}
+
+.missionRegister {
+    background-color: #ed5c11;
+}
+
+.submit, .missionRegister {
+
+    display: none;
+}
+
+.bold-text {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.bold-text {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.hl {
+    background-color: #d95e36;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 15px;
+    margin: 10px;
+}
+
+.center {
+    align-items: center;
+    text-align: center;
+}
+
+.block {
+    display: block;
+    position: relative;
+}
+
+.inline-block {
+    display: inline-block;
+    position: relative;
+}
+
+.hl2 {
+    color: #fdfdfd;
+}
+
+.template {
+    display: none !important;
+}
+
+.titleContainer {
+    margin: 0 5px;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.title {
+    margin: 0 !important;
+}
+
+.itemHeader {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e31837;
+    text-transform: uppercase;
+    font-size: 26px;
+}
+
+#page {
+    display: none; /* js check! */
+    position: relative;
+}
+
+.cargoItem, .missionItem {
+
+    display: block;
+    position: relative;
+    margin: 10px 0;
+    padding: 0 10px;
+    background-color: #063756;
+}
+
+.itemImg {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 250px;
+    height: 140px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    margin: 0;
+    padding: 5px 5px;
+    border-bottom: 3px solid #063756;
+}
+
+tr {
+    background: #3a576a;
+}
+
+.cargoDestinationTable tr:hover {
+    background-color: #497896;
+}
+
+.trSelected {
+    background-color: #497896;
+}
+
+.inMission {
+    background-color: #f43b14 !important;
+}
+
+.inMission:hover {
+    background-color: #f40827 !important;
+}
+
+.missionInfo {
+    display: none;
+    float: right;
+    background: #e31837;
+    padding: 5px 10px;
+}
+
+.icons {
+    position: relative;
+    display: block;
+    float: right;
+    z-index: 2;
+    margin: 22px 0 0 0;
+}
+
+.propertyIcon {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+    width: 32px;
+    height: 32px;
+}
+
+/* CARGODATA */
+
+form {
+    margin: 0;
+}
+
+.cargoName {
+    position: relative;
+    display: block;
+}
+
+.small {
+    font-size: 14px;
+    color: #c9c9c9;
+}
+
+.big {
+    font-size: 24px !important;
+}
+
+.freightFee {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.cargoDistance {
+    display: block;
+    position: relative;
+    text-align: right;
+}
+
+.noAvailable {
+    display: block;
+    position: absolute;
+    text-align: right;
+    bottom: 0;
+    right: 0;
+    background: red;
+    width: 100%;
+    padding: 5px;
+    font-weight: bold;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.noAvailable::before {
+    content: "access_time";
+    font-family: 'Material Icons';
+    display: inline-block;
+    margin-right: 5px;
+    color: #fff;
+    font-size: 18px;
+    vertical-align: sub;
+}
+
+/* REPORT*/
+
+.left {
+    float: left;
+    margin-right: 10px;
+}
+
+.right {
+    float: right;
+    margin-left: 10px;
+}
+
+.trHl {
+    background-color: #063756;
+    color: #5596c1;
+}
+
+.trH2 {
+    background-color: #e31837;
+    color: whitesmoke;
+}
+
+.trH3 {
+    background-color: #456376;
+    color: whitesmoke;
+}
+
+.trH4 {
+    background-color: #ffcc8c !important;
+}
+
+.tr3 td {
+    border-bottom: 3px solid #e31837 !important;
+}
+
+.propNames::before {
+    content: ' (';
+}
+
+.propNames::after {
+    content: ')';
+}
+
+.cargoData {
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 250px auto;
+    /* grid-auto-rows: minmax(300px, auto); */
+    /* grid-gap: 5px 10px; */
+    margin: 10px 0;
+}
+
+.descriptionText {
+
+    display: block;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.cItemSelectBtn {
+    width: 100%;
+    margin: 10px 10px;
+    background-color: #edc054;
+    color: #000;
+    font-size: 14px;
+}
+
+.disabled {
+    background-color: grey !important;
+}
+
+label {
+    display: block;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+/* ********************************************************** */
+/* ************************ NOTIFY ****************************/
+/* ********************************************************** */
+.tblTheme1 {
+
+    color: #1A1A1A;
+}
+
+.tblTheme1 td {
+
+    margin: 0;
+    padding: 5px 15px;
+    text-align: right;
+}
+
+.tblTheme1 th {
+
+    margin: 0;
+    padding: 5px 15px;
+    background: #dc8532;
+    text-align: right;
+}
+
+.tblTheme1 tr {
+    background: #f49d31;
+}
+
+.tblTheme2 {
+
+    color: #fdf9ec;
+}
+
+.tblTheme2 td {
+
+    margin: 0;
+    padding: 5px 15px;
+    text-align: right;
+}
+
+.tblTheme2 th {
+
+    margin: 0;
+    padding: 5px 15px;
+    background: #f42632;
+    text-align: right;
+}
+
+.tblTheme2 tr {
+    background: #f42632;
+}
+
+.payable {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.societyPayableTr {
+
+    background: #064463;
+    display: none;
+}
+
+#vehicleTable {
+
+    border: none !important;
+}
+
+.template, .hide {
+    display: none;
+}
+
+/* **************************************** */
+/* ***************** HUD ****************** */
+/* **************************************** */
+
+#hudWrapper {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 0.7vw;
+    position: absolute;
+    width: 30%;
+    right: 0;
+    left: 0;
+    top: 10px;
+    margin: auto;
+}
+
+#deliveryWrapper {
+    /*background-color: #1c1c1c;*/
+    background-color: rgba(28, 28, 28, 0.7);
+}
+
+/*
+#063756; #3a576a;
+     */
+
+.actionInformation {
+    background: #3a576a;
+    padding: 0.3vw;
+    margin: 0.3vw 0;
+}
+
+.msgCompanyName {
+    font-size: 1vw;
+    padding: 0.1vw;
+}
+
+.msgDescription {
+    padding: 0.1vw;
+}
+
+.msgActionMsg {
+    padding: 0.1vw;
+    background-color: #edc054;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    margin-top: 0.3vw;
+}
+
+#generalWrapper {
+    z-index: 100;
+}
+
+.hudHeader {
+
+    display: grid;
+    grid-template-columns: auto 30%;
+    grid-gap: 5px;
+    padding: 2px 5px;
+}
+
+.productName, .properties, .hudBtn, .hudAddress {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hudProperties {
+    text-align: right;
+}
+
+.productName {
+    font-size: 1vw;
+}
+
+.hudAddress {
+    padding: 0 5px;
+}
+
+.hudAddress::before {
+
+    content: "location_on";
+    font-family: 'Material Icons';
+    display: inline-block;
+    margin-right: 0.3vw;
+    color: #fff;
+}
+
+.displayBar {
+    display: grid;
+    grid-template-columns: 2.2vw 2.2vw 2.2vw 2.2vw auto auto;
+    grid-gap: 5px;
+    padding: 5px;
+}
+
+.progbar {
+    background: linear-gradient(180deg, red 45%, transparent 45%);
+}
+
+.dbBg {
+    position: relative;
+    background-color: #3a3230;
+    padding: 0;
+    height: 2.2vw;
+    border: 1px solid #3a3230;
+}
+
+.trailerBar, .goodsBar {
+
+    position: absolute;
+    width: 0;
+    height: 45%;
+    background-color: green;
+}
+
+.trailerBarText, .goodsBarText {
+
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+}
+
+.wheel, .roll, .damage {
+    background-image: url("img/cargo_icons35x35.png");
+    background-size: 6.2vw 4.4vw;
+}
+
+.wheel {
+    background-position: 0 0;
+}
+
+.alertIcon {
+    background-position-y: 2.2vw !important;
+    border-color: #c3121a;
+}
+
+.roll {
+    background-position: 4.21vw 0;
+}
+
+.damage {
+    background-position: 2.2vw 0;
+}
+
+.hudProperties img {
+    position: relative;
+    display: inline-block;
+    width: 1vw;
+    height: 1vw;
+    background: lightgray;
+    padding: 0.1vw;
+    margin: 0.1vw 0;
+}
+
+.speedLimit {
+    text-align: center;
+    font-size: 1.2vw;
+    line-height: 2.2vw;
+}
+
+.unit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1px;
+    text-align: center;
+    margin: auto;
+}
+
+/* MISSION PAGE */
+
+.missionSetWaypoint, .missionSetDestinationWaypoint {
+
+    margin: 0 0 0 10px !important;
+}
+
+.missionSetDestinationWaypoint {
+
+    display: none;
+}
+
+/* NOTIFICATION */
+
+.notification {
+    display: grid !important;
+    grid-template-columns: min-content auto;
+    padding: 0.2vw 0.6vw 0.2vw 0;
+    box-sizing: border-box;
+    margin: 5px 0;
+    /*font: caption;*/
+    font-size: 0.8vw;
+    font-weight: bold;
+    align-items: center;
+}
+
+.success:before,
+.information:before,
+.warning:before,
+.money:before,
+.fail:before {
+
+    position: relative;
+    display: inherit;
+    font-family: 'Material Icons';
+    font-size: 2vw;
+    margin: 0 1vw 0 0;
+    background: blanchedalmond;
+    height: 100%;
+    align-content: center;
+    padding: 0.2vw 0.6vw; /* EQ NOTIFICATION PADDING */
+    color: #fff;
+}
+
+.success {
+    background: #a0d468;
+    color: #5b793b;
+}
+
+.success:before {
+    content: "done_outline";
+    background-color: #8cc152;
+}
+
+.money {
+    background: #88c6a3;
+    color: #2a593f;
+}
+
+.money:before {
+    content: "attach_money";
+    background-color: #689e80;
+}
+
+.information {
+    background-color: #4fc1e9;
+    color: #396677;
+}
+
+.information:before {
+
+    content: "notifications";
+    background-color: #3bafda;
+}
+
+.warning {
+    background-color: #ffce54;
+    color: #9b6f00;
+}
+
+.warning:before {
+
+    content: "warning";
+    background-color: #f6bb42;
+}
+
+.fail {
+
+    background: #ed5565;
+    color: #8a313a;
+}
+
+.fail:before {
+    background-color: #da4453;
+    content: "error";
+}
+
+.good:before {
+    content: "done";
+    font-family: 'Material Icons';
+    display: block;
+    font-size: 24px;
+    color: #49c34f;
+    text-align: center;
+}
+
+.fault:before {
+    content: "disabled_by_default";
+    font-family: 'Material Icons';
+    display: block;
+    font-size: 24px;
+    color: #da4453;
+    text-align: center;
+}
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+
+.blink {
+    text-decoration: blink;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-direction: alternate;
+}
+
+/* STATISTICS */
+
+.statisticsContainer {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.statValue {
+    font-size: 50px;
+    color: #f6bb42;
+    font-weight: bold;
+}
+
+.statValueBig {
+    font-size: 70px;
+    color: #f6bb42;
+    font-weight: bold;
+}
+
+.stUl1 {
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 410px 410px;
+    grid-gap: 5px 10px;
+    margin: 10px 0;
+    border-bottom: 2px solid orange;
+    background-color: #155988;
+}
+
+.stUl1 li {
+    display: grid;
+    grid-template-columns: max-content auto;
+    padding: 10px;
+}
+
+.stUl2 {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-gap: 5px 10px;
+    padding: 10px;
+    background-color: #155988;
+}
+
+.stUl2 li {
+    display: grid;
+    grid-template-columns: max-content auto;
+    padding: 10px;
+    align-content: center;
+}
+
+.statDesc {
+
+    display: block;
+}
+
+.paddingDesc {
+
+    padding: 15px 0 0 15px;
+}
+
+.statDesc span {
+
+    color: #f6bb42;
+    font-weight: bold;
+}
+
+.statIcon {
+
+    font-size: 90px;
+    background-color: orange;
+    width: 110px;
+    height: 110px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 110px;
+}

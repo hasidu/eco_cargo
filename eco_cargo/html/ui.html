@@ -1,0 +1,533 @@
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+
+<!-- PAGES -->
+<div class="pageWrapper">
+
+    <!-- header -->
+    <div class="header">
+        <h1>ECO CARGO</h1>
+        <a href="#" class="btnClose">Bezár</a>
+    </div>
+
+    <!-- title -->
+    <div class="titleContainer">
+        <div class="headInformation"></div>
+        <h1 class="title"></h1>
+        <span class="description"></span>
+    </div>
+
+    <!-- content -->
+    <div id="page"></div>
+</div>
+
+<!-- PAGE: SELECT CARGO -->
+<!-- ProductSelectForm template -->
+<div class="cargoItem template">
+
+    <div class="cargoHeader">
+        <div class="icons"></div>
+        <h2 class="itemHeader"></h2>
+    </div>
+
+    <div class="cargoData">
+        <div class="itemImg">
+            <span class="availableAlert"></span>
+        </div>
+
+        <!-- Cargo select -->
+        <form class="form" style="padding: 0 0 0 10px;">
+            <table class="cargoDestinationTable"></table>
+
+            <input type="hidden" name="freightData">
+            <input type="hidden" name="targetData">
+            <input type="hidden" name="params">
+
+            <p class="missionInfo">Használd a '/mission' parancsot!</p>
+            <button type="submit" class="submit btn">Kaució befizetése és indulás!</button>
+            <button type="button" class="missionRegister btn">Védőkiséret hívása!</button>
+        </form>
+    </div>
+</div>
+
+<!-- ProductList template -->
+<table class="template">
+
+    <tr class="cargoDestinationTableRow template">
+
+        <td>
+            <span class="cargoName"></span>
+            <span class="cargoDescription small"></span>
+        </td>
+        <td width="80" align="center">Kaució: <span class="cautionMoney"></span></td>
+        <td width="120" align="center"><span class="cargoDefenders"></span></td>
+        <td width="70"><span class="cargoDistance"></span></td>
+        <td width="80"><span class="freightFee right"></span></td>
+    </tr>
+</table>
+
+<!-- Cargo Report template -->
+<div class="cargoReport template">
+
+
+    <table class="cargoReportTable">
+
+        <tr class="trHl">
+            <td>Megrendelő:</td>
+            <td>Célállomás:</td>
+        </tr>
+        <tr>
+            <td>
+                <span class="senderCompany big"></span>
+                <span class="senderAddress block"></span>
+                <span class="senderDescription block small"></span>
+            </td>
+            <td>
+                <span class="deliveryCompany big"></span>
+                <span class="deliveryAddress block"></span>
+                <span class="deliveryDescription block small"></span>
+            </td>
+        </tr>
+
+        <tr class="trHl">
+            <td colspan="2">Fuvarozó:</td>
+        </tr>
+        <tr>
+            <td style="width: 50%"><span class="employeeName"></span></td>
+            <td style="width: 50%">Magánvállalkozó</td>
+        </tr>
+        <tr class="trHl">
+            <td>Áru megnevezése:</td>
+            <td>Távolság:</td>
+        </tr>
+        <tr>
+            <td>
+                <span class="productName big"></span>
+                <span class="propNames"></span>
+            </td>
+            <td>
+                <span class="km"></span> Km
+            </td>
+        </tr>
+
+        <!-- ELSZÁMOLÁS -->
+        <tr>
+            <td colspan="2" id="paymentContainer"></td>
+        </tr>
+
+        <!-- JÁRMŰ ÁLLAPOT -->
+
+        <tr class="trHl">
+            <td colspan="2">Jármű:</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table id="vehicleTable">
+                    <tbody>
+                    <tr>
+                        <td rowspan="3" style="width: 250px;">
+                            <div class="itemImg"></div>
+                        </td>
+                        <td>Rendszám</td>
+                        <td style="text-align: right;"><span class="plate"></span></td>
+                        <td style="min-width: 40px;"></td>
+                        <td>Legnagyobb sebesség (Város)</td>
+                        <td style="text-align: right;"><span class="maxSpeedCity">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Állapot</td>
+                        <td style="text-align: right;"><span class="trailerDamage"></span></td>
+                        <td></td>
+                        <td>Legnagyobb sebesség (Vidék)</td>
+                        <td style="text-align: right;"><span class="maxSpeedCountry">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Állapot</td>
+                        <td style="text-align: right;"><span class="goodsDamage"></span></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<table id="legalPaymentTable" class="paymentTable tblTheme1 template">
+    <thead>
+    <tr>
+        <th style="text-align: left">Tétel</th>
+        <th>Összeg</th>
+        <th>Állapot</th>
+        <th>Levonás</th>
+        <th>Kifizetés</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="text-align: left">Fuvardíj</td>
+        <td class="freightFee"></td>
+        <td class="goodsDamage"></td>
+        <td class="priceDeduction"></td>
+        <td class="pricePayment"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left">Kaució</td>
+        <td class="cautionMoney"></td>
+        <td class="trailerDamage"></td>
+        <td class="cautionDeduction"></td>
+        <td class="cautionPayment"></td>
+    </tr>
+    <tr class="trH4">
+        <td style="text-align: left">Összesen</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="payable"></td>
+    </tr>
+    <tr class="societyPayableTr trH4">
+        <td style="text-align: left">Védő frakció</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="defenderSocietyPayable"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table id="illegalPaymentTable" class="paymentTable tblTheme2 template">
+    <thead>
+    <tr>
+        <th style="text-align: left">Tétel</th>
+        <th>Teljes érték</th>
+        <th>Állapot</th>
+        <th>Levonás</th>
+        <th>Kifizetés</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="text-align: left">Árú</td>
+        <td class="freightFee"></td>
+        <td class="goodsDamage"></td>
+        <td class="priceDeduction"></td>
+        <td class="payable"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!-- PAGE: MISSION -->
+<div class="missionItem template">
+
+    <div class="cargoHeader">
+        <div class="icons"></div>
+        <h2 class="itemHeader"></h2>
+    </div>
+
+    <div class="cargoData">
+        <div class="itemImg"></div>
+
+        <!-- Cargo select -->
+        <form class="form" style="padding: 0 0 0 10px;">
+
+
+            <table class="missionTable">
+                <tr>
+                    <td width="120">Start:</td>
+                    <td>
+                        <span class="missionLoadingAddress"></span>
+                        <button type="button" class="missionSetWaypoint btn2 right">Rakodási hely</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Indította:</td>
+                    <td>
+                        <span class="missionOwner"></span>
+                        <button type="button" class="missionSetDestinationWaypoint btn2 right">Célállomás hely</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Védők:</td>
+                    <td>
+                        <span class="missionDefender"></span>
+                        (<span class="missionJoined"></span> fő)
+                    </td>
+                </tr>
+            </table>
+
+            <input type="hidden" name="missionId">
+
+
+            <button type="button" class="join btn right hide">Csatlakozás</button>
+            <button type="button" class="leave btn3 right hide">Kilépés</button>
+            <button type="button" class="delete btn3 right hide">Küldetés törlése</button>
+
+        </form>
+
+    </div>
+</div>
+
+
+<!-- PAGE: MAINTENANCE -->
+<div class="mnt template">
+
+    <div class="cargoHeader">
+        <h2 class="itemHeader">Adatbázis diagnosztika, karbantartás</h2>
+    </div>
+
+
+    <table class="diagnosticsTable">
+        <tr>
+            <td>Termékek:
+                <span class="descriptionText">Összes termék</span>
+            </td>
+            <td align="right"><span class="countProducts"></span></td>
+            <td width="40" class="countProductsMarker"></td>
+        </tr>
+        <tr>
+            <td>Árva termékek:
+                <span class="descriptionText">Olyan termék, amihez nem tartozik leadó vagy felvevőpont</span>
+            </td>
+            <td align="right"><span class="orphanProduct"></span></td>
+            <td class="orphanProductMarker"></td>
+        </tr>
+        <tr>
+            <td>Útvonalak:
+                <span class="descriptionText">Összes útvonal, benne vannak az ismétlődő útvonalak is</span>
+            </td>
+            <td align="right"><span class="countRoutes"></span></td>
+            <td class="countRoutesMarker"></td>
+        </tr>
+        <tr>
+            <td>Egyedi útvonalak:
+                <span class="descriptionText">Útvonalak száma, ismétlődés nélkül</span>
+            </td>
+            <td align="right"><span class="countUniqueRoutes"></span></td>
+            <td class="countUniqueRoutesMarker"></td>
+        </tr>
+        <tr>
+            <td>Hibás távolság bejegyzések:
+                <span class="descriptionText">`distances` táblában elavult bejegyzés. Olyankor fordul elő, ha az actionpoint-ot áthelyezték. Futtasd a távolságok felvételét!</span>
+            </td>
+            <td align="right"><span class="wrongDistanceRecord"></span></td>
+            <td class="wrongDistanceRecordMarker"></td>
+        </tr>
+        <tr>
+            <td>Árva távolság bejegyzések:
+                <span class="descriptionText">`distances` táblában létező bejegyzés, amihez nem tartazok útvonal. Futtasd a távolságok felvételét!</span>
+            </td>
+            <td align="right"><span class="orphanDistanceRecord"></span></td>
+            <td class="orphanDistanceRecordMarker"></td>
+        </tr>
+        <tr>
+            <td>Hiányzó távolság bejegyzések:
+                <span class="descriptionText">`distances` táblából hiányzó bejegyzés. Futtasd a távolságok felvételét!</span>
+            </td>
+            <td align="right"><span class="missingDistanceRecord"></span></td>
+            <td class="missingDistanceRecordMarker"></td>
+        </tr>
+        <tr>
+            <td>Zonák (actionpoints) száma:
+                <span class="descriptionText">A `zones` táblában szereplő record-ok száma</span>
+            </td>
+            <td align="right"><span class="countActionPoints"></span></td>
+            <td class="countActionPointsMarker"></td>
+        </tr>
+        <tr>
+            <td>Hiányzó zónák:
+                <span class="descriptionText">Olyan zóna, amire a `products` táblában van hivatkozás, mint leadó, vagy felvevőpont, de a `zones` táblában nem létezik</span>
+            </td>
+            <td align="right"><span class="missingActionPoints"></span></td>
+            <td class="missingActionPointsMarker"></td>
+        </tr>
+        <tr>
+            <td>Árva zónák:
+                <span class="descriptionText">A `zones` táblában lévő bejegyzés, ami nincs használatban (törölhető)</span>
+            </td>
+            <td align="right"><span class="orphanActionPoints"></span></td>
+            <td class="orphanActionPointsMarker"></td>
+        </tr>
+        <tr>
+            <td colspan="3">Hiányzó távolságok újraszámítása, pótlása:
+                <span class="descriptionText">A `distances` tábla karbantartása. <span class="warning">A művelet közben megnyilik a térkép, ne zárd be!</span></span>
+                <form class="right">
+
+                    <button type="button" class="distanceBtn btn right">Távolság bejegyzések felvétele / javítása
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <p>ADMIN TOOLS:</p>
+                <ul>
+                    <li>Új akciópontok (zónák) felvétele: ECO_COORDS</li>
+                    <li>Új trailer spawnpoint-ok felvétele: ECO_PLACE</li>
+                    <li>Termék és zóna manger: webes felület</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="statistics template">
+
+    <div class="cargoHeader">
+        <h2 class="itemHeader">Statisztika</h2>
+    </div>
+
+    <!--<div class="statisticsMenu">
+        <ul>
+            <li>Saját statisztika</li>
+            <li>Összesített lista</li>
+        </ul>
+    </div>-->
+
+    <div class="statisticsContainer">
+
+        <ul class="stUl1">
+            <li>
+                <span class="qualityRate statValueBig"></span>
+                <span class="statDesc paddingDesc">
+                    <span>Elégedetségi mutató</span><br/>a leszállított árúk minősége alapján
+                </span>
+            </li>
+            <li>
+                <span class="successRate statValueBig"></span>
+                <span class="statDesc paddingDesc">
+                    <span>Siker mutató</span><br/>vállalt és leszállított fuvarok aránya
+                </span>
+            </li>
+        </ul>
+
+
+        <ul class="stUl2">
+            <li>
+                <span class="material-icons statIcon">open_in_full</span>
+                <span>
+                    <span class="distance statValue"></span>
+                    <span class="statDesc">Megtett távolság [<span>km</span>]</span>
+                </span>
+            </li>
+            <li>
+                <span class="material-icons statIcon">query_builder</span>
+                <span>
+                    <span class="workingTime statValue"></span>
+                    <span class="statDesc">
+                        Munkaidő [<span class="timeUnit"></span>]<br/>Munkavállalás: <span
+                            class="registeredTime"></span>
+                    </span>
+                </span>
+            </li>
+            <li>
+                <span class="material-icons statIcon">content_paste</span>
+                <span>
+                    <span class="allStarted statValue"></span>
+                    <span class="statDesc">
+                        Elvállalt fuvarjaid<br/>
+                        <span class="startedMission"></span> küldetés<br/>
+                        <span class="startedDelivery"></span> magán
+                    </span>
+                </span>
+            </li>
+            <li>
+                <span class="material-icons statIcon">add_task</span>
+                <span>
+                    <span class="allDone statValue"></span>
+                    <span class="statDesc">
+                        Teljesített fuvarjaid<br/>
+                        <span class="doneMission"></span> küldetés<br/>
+                        <span class="doneDelivery"></span> magán
+                    </span>
+                </span>
+
+            </li>
+            <li>
+                <span class="material-icons statIcon">verified_user</span>
+                <span>
+                    <span class="defender statValue"></span>
+                    <span class="statDesc">Küldetések, melyekben védő voltál</span>
+                </span>
+            </li>
+            <li>
+                <span class="material-icons statIcon">content_paste_off</span>
+                <span>
+                    <span class="allStolen statValue"></span>
+                    <span class="statDesc">
+                        Általad eltulajdonitott fuvarok<br/>
+                        <span class="stolenMission"></span> küldetés<br/>
+                        <span class="stolenDelivery"></span> magán
+                    </span>
+                </span>
+            </li>
+            <li>
+                <span class="material-icons statIcon">disabled_by_default</span>
+                <span>
+                    <span class="destroyedTrailer statValue"></span>
+                    <span class="statDesc">Totálkáros félpótkocsi</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- HUD -->
+<div id="hudWrapper">
+    <div id="deliveryWrapper"></div>
+    <div id="actionWrapper"></div>
+    <div id="generalWrapper"></div>
+</div>
+
+<div class="hud template">
+
+    <div class="hudHeader">
+
+        <div class="productName"></div>
+        <div class="hudProperties"></div>
+    </div>
+    <!--<div class="hudAddress"></div>-->
+
+    <div class="displayBar">
+        <div class="speed dbBg">
+            <div class="speedLimit"></div>
+            <!--<div class="unit">km/h</div>-->
+        </div>
+        <div class="wheel dbBg"></div>
+        <div class="roll dbBg"></div>
+        <div class="damage dbBg"></div>
+
+        <div class="trailer dbBg progbar">
+
+            <div class="trailerBar"></div>
+            <div class="trailerBarText">Pót: <span class="trailerHealth"></span>%</div>
+        </div>
+        <div class="goods dbBg progbar">
+
+            <div class="goodsBar"></div>
+            <div class="goodsBarText">Árú: <span class="goodsQuality"></span>%</div>
+        </div>
+    </div>
+</div>
+
+<div class="actionInformation template">
+    <span class='msgCompanyName block'></span>
+    <span class='msgDescription block'></span>
+    <span class='msgActionMsg block'></span>
+</div>
+
+
+<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+<script src="js/hud.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
+
+</body>
