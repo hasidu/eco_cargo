@@ -6,15 +6,15 @@ FONTOS: Ha több karakteres rendszert használsz:
 Kashakter esetén, ellenőrizd, hogy a client/main.lua fájlban az alábbi eseménykezelő tartlamazza a esx:kashloaded triggert
 Az eco_cargo config fájlban állitsd a Config.kashacters = true értékre.
 
--- RegisterNetEvent('kashactersC:SpawnCharacter')
--- AddEventHandler('kashactersC:SpawnCharacter', function(spawn, isnew)
+RegisterNetEvent('kashactersC:SpawnCharacter')
+AddEventHandler('kashactersC:SpawnCharacter', function(spawn, isnew)
 
     -- Betöltési folyamat...
     -- ...
     -- ...
 
     TriggerEvent('esx:kashloaded')
--- end)
+end)
 
 
 # MISSZIÓK
