@@ -2,11 +2,6 @@ freight work
 
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
-[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=Q2TpDI_MPdI)
-
-<iframe width="854" height="480" src="https://www.youtube.com/embed/Q2TpDI_MPdI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 # ECO CARGO
 
 FONTOS: Ha több karakteres rendszert használsz:
