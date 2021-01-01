@@ -2,7 +2,8 @@ freight work
 
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
-![](https://www.youtube.com/watch?v=Q2TpDI_MPdI)
+[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=Q2TpDI_MPdI)
+
 
 # ECO CARGO
 
