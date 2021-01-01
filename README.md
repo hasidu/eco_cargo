@@ -2,6 +2,8 @@ freight work
 
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
+![](https://www.youtube.com/watch?v=Q2TpDI_MPdI)
+
 # ECO CARGO
 
 FONTOS: Ha több karakteres rendszert használsz:
