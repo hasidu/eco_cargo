@@ -1,16 +1,13 @@
+# ECO CARGO
 Kamionos munka - freight work
-
-![cargo_cp](https://postimg.cc/WhbG7Nsh][img]https://i.postimg.cc/WhbG7Nsh/eco-cargo-cp.jpg)
-
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
-# ECO CARGO
+![cargo_cp](https://postimg.cc/WhbG7Nsh)
 
 FONTOS: Ha több karakteres rendszert használsz:
 
 Kashakter esetén, ellenőrizd, hogy a client/main.lua fájlban az alábbi eseménykezelő tartlamazza a esx:kashloaded triggert
 Az eco_cargo config fájlban állitsd a Config.kashacters = true értékre.
-
 
 RegisterNetEvent('kashactersC:SpawnCharacter')
 AddEventHandler('kashactersC:SpawnCharacter', function(spawn, isnew)
