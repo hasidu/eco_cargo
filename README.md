@@ -1,6 +1,7 @@
 Kamionos munka - freight work
 
-![Screenshot 2020-02-09 at 5 08 54 PM](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_cp.jpg) 
+![Screenshot1](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_cp.jpg) 
+![Screenshot1](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_select.jpg) 
 
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
