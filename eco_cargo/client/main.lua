@@ -276,6 +276,9 @@ Citizen.CreateThread(function()
 
                         -- REPORT
                         openNUI(report, "CARGO_REPORT")
+                            
+                        DetachVehicleFromTrailer(ECO.Vehicle)
+                        Citizen.Wait(300)
 
                         ESX.Game.DeleteVehicle(ECO.CARGO.trailer)
                         finishCargo('DELIVERED')
