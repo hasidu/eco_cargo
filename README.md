@@ -42,6 +42,5 @@ end)
     -- /inspect     -- A trailer mellé állva lekéri a szállítólevelet
     -- /mission     -- Küldetéslista
     -- /cargostat   -- Játékosok fuvar statisztikája
-    -- /closenui    -- Nui bezárási problémák esetére
-
+    -- /closenui
 A szkriptbe építve megtalálható a mythic_notify így azt külön telepíteni nem kell.
