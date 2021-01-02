@@ -1,7 +1,18 @@
 Kamionos munka - freight work
 
-![Screenshot1](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_cp.jpg) 
-![Screenshot1](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_select.jpg) 
+[url=https://postimg.cc/WhbG7Nsh][img]https://i.postimg.cc/WhbG7Nsh/eco-cargo-cp.jpg[/img][/url]
+
+[url=https://postimg.cc/tYShSKgD][img]https://i.postimg.cc/tYShSKgD/eco-cargo-hud.jpg[/img][/url]
+
+[url=https://postimg.cc/sMM5tTQz][img]https://i.postimg.cc/sMM5tTQz/eco-cargo-inspect.jpg[/img][/url]
+
+[url=https://postimg.cc/rD75c5xr][img]https://i.postimg.cc/rD75c5xr/eco-cargo-map.jpg[/img][/url]
+
+[url=https://postimg.cc/v19fmDtS][img]https://i.postimg.cc/v19fmDtS/eco-cargo-report.jpg[/img][/url]
+
+[url=https://postimg.cc/S2h8YqZQ][img]https://i.postimg.cc/S2h8YqZQ/eco-cargo-select.jpg[/img][/url]
+
+[url=https://postimg.cc/k6vSxZZQ][img]https://i.postimg.cc/k6vSxZZQ/eco-cargo-stat.jpg[/img][/url]
 
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
