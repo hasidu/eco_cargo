@@ -1,8 +1,9 @@
 # ECO CARGO
-Kamionos munka - freight work
+Kamionos munka - freight work for FiveM (ESX)
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
 ![cargo_cp](https://postimg.cc/WhbG7Nsh)
+![Settings Window](https://i.postimg.cc/k6vSxZZQ/eco-cargo-stat.jpg)
 
 FONTOS: Ha több karakteres rendszert használsz:
 
