@@ -2,8 +2,8 @@
 Kamionos munka - freight work for FiveM (ESX)
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
-![cargo cp](https://i.postimg.cc/fTY8DyFj/eco-cargo-cp.jpg)
-![Settings Window](https://i.postimg.cc/k6vSxZZQ/eco-cargo-stat.jpg)
+![ecocargo gallery](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_gallery.jpg)
+[Képek](https://postimg.cc/gallery/hmm2bTb)
 
 FONTOS: Ha több karakteres rendszert használsz:
 
