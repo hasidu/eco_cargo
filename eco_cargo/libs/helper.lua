@@ -256,16 +256,16 @@ function remainingTime(lastStartTime, reproductionTime, serverTimeStamp)
     end
 end
 
-function displayTime(ellapsedTime)
+function displayTime(elapsedTime)
 
-    if ellapsedTime < 60 then return ellapsedTime, 'sec' end
+    if elapsedTime < 60 then return elapsedTime, 'sec' end
 
-    local hours = math.floor(ellapsedTime/3600)
-    local minutes = math.floor(math.fmod(ellapsedTime,3600)/60)/60
+    local hours = math.floor(elapsedTime/3600)
+    local minutes = math.floor(math.fmod(elapsedTime,3600)/60)/60
 
     if hours < 1 then
 
-        local minutes = math.floor(math.fmod(ellapsedTime,3600)/60)
+        local minutes = math.floor(math.fmod(elapsedTime,3600)/60)
         return minutes, 'minute'
     end
 

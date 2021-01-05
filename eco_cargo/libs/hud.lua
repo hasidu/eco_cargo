@@ -123,17 +123,20 @@ end)
 RegisterNetEvent('eco_cargo:missionNotification')
 AddEventHandler('eco_cargo:missionNotification', function(data)
 
-    if (data.defender and data.defender == ECO.PLAYER.job.name) or (data.owner and data.owner.identifier == ECO.PLAYER.identifier) then
+    if ECO.PLAYER.job then
 
-        DoCustomHudText(data.type, data.text, data.length, data.style)
+        if (data.defender and data.defender == ECO.PLAYER.job.name) or (data.owner and data.owner.identifier == ECO.PLAYER.identifier) then
 
-        if data.showChat then
+            DoCustomHudText(data.type, data.text, data.length, data.style)
 
-            TriggerEvent("chat:addMessage", { args = { "^1[ECO CARGO]", data.text } })
+            if data.showChat then
+
+                TriggerEvent("chat:addMessage", { args = { "^1[ECO CARGO]", data.text } })
+            end
+
+        elseif data.otherText then
+
+            TriggerEvent("chat:addMessage", { args = { "^1[ECO CARGO]", data.otherText } })
         end
-
-    elseif data.otherText then
-
-        TriggerEvent("chat:addMessage", { args = { "^1[ECO CARGO]", data.otherText } })
     end
 end)

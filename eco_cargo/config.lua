@@ -2,8 +2,11 @@ Config = {}
 Config.Locale = 'hu'
 
 -- MULTI CHARACTER
--- If ture then wait for 'esx:kashloaded' trigger! -- README.MD
+-- If true then wait for 'esx:kashloaded' trigger! -- README.MD
 Config.kashacters = false
+
+-- a member of a defensive faction is prohibited from launching a mission he defends
+Config.disableMissionStartForDefenders = true
 
 Config.illegalFactions = {
     'vagos',
@@ -31,15 +34,16 @@ Config.speedLimit = {
 -- MONEY TYPE FOR STOLEN CARGO
 Config.stolenCargoPaymentType = 'black_money' -- OPTIONS: 'money', 'black_money', 'bank'; DEFAULT: 'black_money',
 
--- Késleltetési idő két fuvar lekérése között
-Config.cargoRequestDelay = 1 -- Minute
+-- Delay time between the start of two transports (the cp disappears)
+Config.cargoRequestDelay = 1 -- DEFAULT: 1, in minute
 
 Config.kilometerFee = 90 -- DEFAULT: 90, Kilométerenkénti díj
+
 Config.distanceMultiplier = 0.99 -- DEFAULT: 0.99,  Távolság szorzó (1 alatt csökkenti a távolság arányában a kifizetést)
 
 Config.baseFee = 100 -- DEFAULT: 100, Kiállási alapdíj
 
-Config.countingZoneRadius = 40 -- DEFAULT: 40 A védőknek ezen a körön belül kell lenniük
+Config.countingZoneRadius = 40 -- DEFAULT: 40 -- Defenders must be within that range
 
 -- SAFETY REGULATIONS
 Config.propertyParams = {

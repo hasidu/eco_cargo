@@ -58,7 +58,6 @@ RegisterNUICallback('missionRegister', function(data, cb)
                     type = "information",
                     message = _('invited_players', targetPlayers)
                 }))
-
             else
 
                 cb(json.encode({
@@ -150,21 +149,20 @@ end)
 function countDefenders(defender)
 
     local zoneCenter = GetEntityCoords(_PlayerPedId)
-    local ped, pedCoords, serverId, job
+    local ped, serverId, job
     local defenders = 0
 
     for _, player in ipairs(GetActivePlayers()) do
 
-        local ped = GetPlayerPed(player)
-        local pedCoords = GetEntityCoords(ped)
+        ped = GetPlayerPed(player)
 
         if DoesEntityExist(ped) and not IsEntityDead(ped) then
 
-            if #(zoneCenter - pedCoords) < Config.countingZoneRadius + 0.0 then
+            if #(zoneCenter - GetEntityCoords(ped)) < Config.countingZoneRadius + 0.0 then
 
                 serverId = GetPlayerServerId(player)
 
-                job = ECO.PLAYERS[serverId] or ''
+                job = ECO.PLAYERS[serverId] or 'unknown'
 
                 if job == defender and serverId ~= ECO.PLAYER['serverId'] then
 

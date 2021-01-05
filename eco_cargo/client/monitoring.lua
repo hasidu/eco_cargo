@@ -18,7 +18,7 @@ Citizen.CreateThread(function()
 
         ----------------- DATA COLLECTION -----------------
 
-        ECO.MONITOR.gameTimer = GetGameTimer() -- TODO NEM MUSZÁJ ITT LENNIE
+        ECO.MONITOR.gameTimer = GetGameTimer()
         ECO.PLAYER.coords = GetEntityCoords(_PlayerPedId)
 
 
@@ -188,7 +188,3 @@ AddEventHandler('eco_cargo:productUpdate', function(data)
         ECO.allProducts[data.productId].loading[data.loadingZoneId] = data.time
     end
 end)
-
-
-
-

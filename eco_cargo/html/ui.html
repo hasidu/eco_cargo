@@ -295,6 +295,11 @@
             <td width="40" class="countProductsMarker"></td>
         </tr>
         <tr>
+            <td colspan="3">Hiányzó terméknév fordítások a nyelvi fájlban:
+                <span class="missingLocales"></span>
+            </td>
+        </tr>
+        <tr>
             <td>Árva termékek:
                 <span class="descriptionText">Olyan termék, amihez nem tartozik leadó vagy felvevőpont</span>
             </td>
@@ -357,14 +362,15 @@
             <td align="right"><span class="orphanActionPoints"></span></td>
             <td class="orphanActionPointsMarker"></td>
         </tr>
+
         <tr>
             <td colspan="3">Hiányzó távolságok újraszámítása, pótlása:
-                <span class="descriptionText">A `distances` tábla karbantartása. <span class="warning">A művelet közben megnyilik a térkép, ne zárd be!</span></span>
                 <form class="right">
 
                     <button type="button" class="distanceBtn btn right">Távolság bejegyzések felvétele / javítása
                     </button>
                 </form>
+                <span class="descriptionText">A `distances` tábla karbantartása. <strong>A művelet közben megnyilik a térkép, ne zárd be!</strong></span>
             </td>
         </tr>
         <tr>
@@ -378,107 +384,148 @@
             </td>
         </tr>
     </table>
+    <p style="text-align: center;padding: 30px;">ECO CARGO 2021</p>
 </div>
 
-<div class="statistics template">
+<div class="statisticsContainer template">
 
     <div class="cargoHeader">
         <h2 class="itemHeader">Statisztika</h2>
     </div>
 
-    <!--<div class="statisticsMenu">
-        <ul>
-            <li>Saját statisztika</li>
-            <li>Összesített lista</li>
-        </ul>
-    </div>-->
+    <ul class="statisticsMenu">
+        <li id="myStatisticsBtn" class="btn">Saját statisztika</li>
+        <li id="summaryStatisticsBtn" class="btn">Összesített lista</li>
+    </ul>
 
-    <div class="statisticsContainer">
 
-        <ul class="stUl1">
-            <li>
-                <span class="qualityRate statValueBig"></span>
-                <span class="statDesc paddingDesc">
-                    <span>Elégedetségi mutató</span><br/>a leszállított árúk minősége alapján
-                </span>
-            </li>
-            <li>
-                <span class="successRate statValueBig"></span>
-                <span class="statDesc paddingDesc">
+    <div class="statisticsContent"></div>
+</div>
+
+<div class="summaryStatistics template">
+    <table class="summaryStatisticsTable tblTheme3">
+        <tr>
+            <th class="summaryStatHeadRanking">H.</th>
+            <th class="summaryStatHeadName" data-orderby="firstname">Név</th>
+            <th class="summaryStatHeadDistance" data-orderby="distance">Km</th>
+            <th class="summaryStatHeadWorkingTime" data-orderby="working_time">Munkaidő</th>
+            <th class="summaryStatHeadAllStarted" data-orderby="all_started">Fuvarok</th>
+            <th class="summaryStatHeadAllDone" data-orderby="all_done">Teljesített</th>
+            <th class="summaryStatHeadVulnerable" data-orderby="vulnerable">Sérülékeny</th>
+            <th class="summaryStatHeadQualityRate" data-orderby="quality_rate">Elégedettség</th>
+            <th class="summaryStatHeadSuccessRate" data-orderby="success_rate">Siker</th>
+            <th class="summaryStatHeadRegistered" data-orderby="registered">Első fuvar</th>
+            <th class="summaryStatHeadLastActivity" data-orderby="last_activity">Utolsó aktivitás</th>
+        </tr>
+        <tr class="summaryStatisticsTableTr template">
+            <td class="ranking"></td>
+            <td class="summaryStatValueName"></td>
+            <td class="summaryStatValueDistance"></td>
+            <td class="summaryStatValueWorkingTime"></td>
+            <td class="summaryStatValueAllStarted"></td>
+            <td class="summaryStatValueAllDone"></td>
+            <td class="summaryStatValueVulnerable"></td>
+            <td class="summaryStatValueQualityRate"></td>
+            <td class="summaryStatValueSuccessRate"></td>
+            <td class="summaryStatValueRegistered"></td>
+            <td class="summaryStatValueLastActivity"></td>
+        </tr>
+    </table>
+</div>
+
+<div class="myStatistics template">
+
+    <ul class="stUl1">
+        <li>
+            <span class="qualityRate statValueBig"></span>
+            <span class="statDesc paddingDesc">
+                    <span>Elégedettségi mutató</span><br/>a leszállított árúk minősége alapján
+            </span>
+        </li>
+        <li>
+            <span class="successRate statValueBig"></span>
+            <span class="statDesc paddingDesc">
                     <span>Siker mutató</span><br/>vállalt és leszállított fuvarok aránya
-                </span>
-            </li>
-        </ul>
+            </span>
+        </li>
+    </ul>
 
 
-        <ul class="stUl2">
-            <li>
-                <span class="material-icons statIcon">open_in_full</span>
-                <span>
-                    <span class="distance statValue"></span>
-                    <span class="statDesc">Megtett távolság [<span>km</span>]</span>
+    <ul class="stUl2">
+        <li>
+            <span class="material-icons statIcon">open_in_full</span>
+            <span>
+                <span class="distance statValue"></span>
+                <span class="statDesc">Megtett távolság [<span>km</span>]</span>
+            </span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">query_builder</span>
+            <span>
+                <span class="workingTime statValue"></span>
+                <span class="statDesc">
+                    Munkaidő [<span class="timeUnit"></span>]<br/>Munkavállalás: <span
+                        class="registeredTime"></span>
                 </span>
-            </li>
-            <li>
-                <span class="material-icons statIcon">query_builder</span>
-                <span>
-                    <span class="workingTime statValue"></span>
-                    <span class="statDesc">
-                        Munkaidő [<span class="timeUnit"></span>]<br/>Munkavállalás: <span
-                            class="registeredTime"></span>
-                    </span>
-                </span>
-            </li>
-            <li>
-                <span class="material-icons statIcon">content_paste</span>
-                <span>
+            </span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">content_paste</span>
+            <span>
                     <span class="allStarted statValue"></span>
                     <span class="statDesc">
                         Elvállalt fuvarjaid<br/>
                         <span class="startedMission"></span> küldetés<br/>
                         <span class="startedDelivery"></span> magán
                     </span>
-                </span>
-            </li>
-            <li>
-                <span class="material-icons statIcon">add_task</span>
-                <span>
+            </span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">add_task</span>
+            <span>
                     <span class="allDone statValue"></span>
                     <span class="statDesc">
                         Teljesített fuvarjaid<br/>
                         <span class="doneMission"></span> küldetés<br/>
                         <span class="doneDelivery"></span> magán
                     </span>
+            </span>
+        </li>
+        <li>
+            <!-- wine_bar -->
+            <span class="material-icons statIcon">local_bar</span>
+            <span>
+                    <span class="vulnerable statValue"></span>
+                    <span class="statDesc">Sérülékeny fuvarok</span>
                 </span>
-
-            </li>
-            <li>
-                <span class="material-icons statIcon">verified_user</span>
-                <span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">verified_user</span>
+            <span>
                     <span class="defender statValue"></span>
                     <span class="statDesc">Küldetések, melyekben védő voltál</span>
                 </span>
-            </li>
-            <li>
-                <span class="material-icons statIcon">content_paste_off</span>
-                <span>
-                    <span class="allStolen statValue"></span>
-                    <span class="statDesc">
-                        Általad eltulajdonitott fuvarok<br/>
-                        <span class="stolenMission"></span> küldetés<br/>
-                        <span class="stolenDelivery"></span> magán
-                    </span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">disabled_by_default</span>
+            <span>
+                <span class="destroyedTrailer statValue"></span>
+                <span class="statDesc">Totálkáros félpótkocsi</span>
+            </span>
+        </li>
+        <li>
+            <span class="material-icons statIcon">content_paste_off</span>
+            <span>
+                <span class="allStolen statValue"></span>
+                <span class="statDesc">
+                    Általad eltulajdonitott fuvarok<br/>
+                    <span class="stolenMission"></span> küldetés<br/>
+                    <span class="stolenDelivery"></span> magán
                 </span>
-            </li>
-            <li>
-                <span class="material-icons statIcon">disabled_by_default</span>
-                <span>
-                    <span class="destroyedTrailer statValue"></span>
-                    <span class="statDesc">Totálkáros félpótkocsi</span>
-                </span>
-            </li>
-        </ul>
-    </div>
+            </span>
+        </li>
+    </ul>
+
 </div>
 
 <!-- HUD -->
@@ -527,6 +574,7 @@
 
 
 <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+<script src="js/helper.js" type="text/javascript"></script>
 <script src="js/hud.js" type="text/javascript"></script>
 <script src="js/app.js" type="text/javascript"></script>
 

@@ -22,7 +22,7 @@ ESX.RegisterServerCallback('eco_cargo:getPlayers', function(source, cb)
         local xPlayer
         local getPlayers = ESX.GetPlayers()
 
-        for i = 1, #getPlayers, 1 do
+        for i = 1, #getPlayers do
 
             xPlayer = ESX.GetPlayerFromId(getPlayers[i])
 
@@ -179,10 +179,10 @@ ESX.RegisterServerCallback('eco_cargo:getDataByPlate', function(source, cb, plat
     cb(ECO.CARGO[plate])
 end)
 
-ESX.RegisterServerCallback('eco_cargo:getAllStatistics', function(source, cb, orderBy, dir)
+ESX.RegisterServerCallback('eco_cargo:getAllStatistics', function(source, cb, data)
 
-    if not orderBy or orderBy == '' then orderBy = 'quality_rate' end
-    if not dir or dir == '' then dir = 'ASC' end
+    if not data.orderBy or data.orderBy == '' then data.orderBy = 'all_started' end
+    if not data.dir or data.dir == '' then data.dir = 'DESC' end
 
     -- STAT RECORD
     local sql = [[
@@ -198,14 +198,11 @@ ESX.RegisterServerCallback('eco_cargo:getAllStatistics', function(source, cb, or
         FROM `eco_cargo_stats`
         LEFT JOIN `users`
         USING (`identifier`)
-        ORDER BY @orderBy @dir
-        LIMIT 100
+        ORDER BY `]] .. data.orderBy .. [[` ]] .. data.dir .. [[
+        LIMIT 50
     ]]
 
-    MySQL.Async.fetchAll(sql, {
-        ['@orderBy'] = orderBy,
-        ['@dir'] = dir
-    }, function(result)
+    MySQL.Async.fetchAll(sql, {}, function(result)
 
         cb(result)
     end)
@@ -237,22 +234,7 @@ ESX.RegisterServerCallback('eco_cargo:getStatistics', function(source, cb)
         ['@identifier'] = identifier
     }, function(result)
 
-        if result[1] then
-
-            result = result[1]
-
-            local timeValue, timeUnit = displayTime(result.working_time)
-
-            result.distance = math.round(result.distance, 1)
-            result.quality_rate = math.round(result.quality_rate, 1)
-            result.success_rate = math.round(result.success_rate, 1)
-            result.working_time = math.round(timeValue, 1)
-            result.working_time_unit = _(timeUnit)
-            result.registered = sqlTime2date(result.registered)
-            result.last_activity = sqlTime2date(result.last_activity)
-
-            cb(result)
-        end
+        cb(result)
     end)
 end)
 
@@ -293,7 +275,7 @@ AddEventHandler('eco_cargo:cargoRegister', function(ecoCargo)
 
     local _source = source
     local plate = safePlate(ecoCargo.trailerPlate)
-    local isMission
+    local isMission, isVulnerable
     local osTime = os.time()
 
     if not ECO.CARGO[plate] then ECO.CARGO[plate] = {} end
@@ -329,7 +311,14 @@ AddEventHandler('eco_cargo:cargoRegister', function(ecoCargo)
         TriggerClientEvent('eco_cargo:missionUpdate', -1, ECO.MISSION)
 
         -- BROADCAST
-        TriggerClientEvent('eco_cargo:missionNotification', -1, {otherText = _('mission_start_alert')})
+        TriggerClientEvent('eco_cargo:missionNotification', -1, { otherText = _('mission_start_alert') })
+    end
+
+
+    if ecoCargo.params.damageRoll < 10 or
+       ecoCargo.params.collisionSensitivity < 100 then
+
+        isVulnerable = true
     end
 
 
@@ -340,17 +329,20 @@ AddEventHandler('eco_cargo:cargoRegister', function(ecoCargo)
         `identifier`,
         `started_delivery`,
         `started_mission`,
+        `vulnerable`,
         `last_activity`
     ) VALUES (
 
         @identifier,
         @started_delivery,
         @started_mission,
+        @vulnerable,
         current_timestamp()
         )
         ON DUPLICATE KEY UPDATE
         `started_delivery` = `started_delivery` + @started_delivery,
         `started_mission` = `started_mission` + @started_mission,
+        `vulnerable` = `vulnerable` + @vulnerable,
         `last_activity` = current_timestamp()
     ]]
 
@@ -360,13 +352,13 @@ AddEventHandler('eco_cargo:cargoRegister', function(ecoCargo)
             ['@identifier'] = ecoCargo.owner.identifier,
             ['@started_delivery'] = isMission and 0 or 1,
             ['@started_mission'] = isMission and 1 or 0,
+            ['@vulnerable'] = isVulnerable and 1 or 0,
         }, function(rowsChanged)
 
             print("STAT INSERT OK", rowsChanged)
         end)
 
     TriggerClientEvent('eco_cargo:productUpdate', -1, {
-
         productId = ecoCargo.productId,
         loadingZoneId = ecoCargo.loadingZoneId,
         time = osTime

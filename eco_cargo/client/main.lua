@@ -276,7 +276,7 @@ Citizen.CreateThread(function()
 
                         -- REPORT
                         openNUI(report, "CARGO_REPORT")
-                            
+
                         DetachVehicleFromTrailer(ECO.Vehicle)
                         Citizen.Wait(300)
 
@@ -379,7 +379,8 @@ function openNUI(data, subject)
         subject = subject,
         currentZone = currentActionData or {},
         player = ECO.PLAYER,
-        mission = ECO.MISSION
+        mission = ECO.MISSION,
+        disableMissionStartForDefenders = Config.disableMissionStartForDefenders
     })
 end
 
@@ -389,6 +390,7 @@ RegisterNUICallback('registerCargo', function(data, cb)
     SetNuiFocus(false, false)
 
     local startPermission = true
+    local permissionMsg = ''
 
     if data.defender ~= '' then
 
@@ -397,6 +399,18 @@ RegisterNUICallback('registerCargo', function(data, cb)
             for _, v in pairs(ECO.MISSION) do
 
                 if v.trailerPlate then startPermission = false end
+            end
+
+            permissionMsg = _('a_mission_is_already_in_progress')
+        end
+
+
+        if Config.disableMissionStartForDefenders then
+
+            if data.defender == ECO.PLAYER.job.name then
+
+                startPermission = false
+                permissionMsg = _('disable_mission_start_for_defenders')
             end
         end
     end
@@ -455,7 +469,7 @@ RegisterNUICallback('registerCargo', function(data, cb)
         end, data)
     else
 
-        DoCustomHudText('fail', _('a_mission_is_already_in_progress'))
+        DoCustomHudText('fail', permissionMsg)
     end
 
     cb('ok')

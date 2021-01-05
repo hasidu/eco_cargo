@@ -193,15 +193,18 @@ AddEventHandler('eco_cargo:cargoDiagnostics', function()
     ECO.DIAGNOSTICS.orphanDistanceRecord = {}
     ECO.DIAGNOSTICS.missingDistanceRecord = 0
 
-
     ECO.DIAGNOSTICS.missingActionPoints = {}
     ECO.DIAGNOSTICS.orphanActionPoints = {}
+
+    ECO.DIAGNOSTICS.localeDiagnostics = {}
+
 
     Citizen.CreateThread(function()
 
 
         -- LOADING DATABASE: ZONE DATA
         local loadAllZones
+
         ESX.TriggerServerCallback('eco_cargo:getZones', function(zones)
 
             if zones[1] ~= nil then
@@ -228,6 +231,7 @@ AddEventHandler('eco_cargo:cargoDiagnostics', function()
 
         -- TÁVOLSÁGADATOK LEKÉRÉSE
         local loadDistances
+
         ESX.TriggerServerCallback('eco_cargo:getDistances', function(result)
 
             if (result[1] ~= nil) then
@@ -323,8 +327,10 @@ AddEventHandler('eco_cargo:cargoDiagnostics', function()
 
                 ECO.DIAGNOSTICS.countRoutes = k
                 ECO.DIAGNOSTICS.countUniqueRoutes = assocCount(uniqueIdC)
-            end
 
+                -- LOCALE DIAGNOSTICS
+                localeDiagnostics(product)
+            end
 
             loadAllProducts = true
         end, true)
@@ -359,3 +365,16 @@ AddEventHandler('eco_cargo:cargoDiagnostics', function()
         openNUI(ECO.DIAGNOSTICS, 'MAINTENANCE')
     end)
 end)
+
+function localeDiagnostics(product)
+
+    ECO.DIAGNOSTICS.missingLocales = {}
+
+    for j = 1, #product do
+
+        if string.match(_(product[j].name), "Translation") then
+
+            table.insert(ECO.DIAGNOSTICS.missingLocales, product[j].name)
+        end
+    end
+end

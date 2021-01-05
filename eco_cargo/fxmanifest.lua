@@ -4,7 +4,7 @@ game 'gta5'
 
 author 'Ekhion'
 description 'Economy - Cargo'
-version '0.1 alpha'
+version '0.2 alpha'
 
 client_scripts {
     '@es_extended/locale.lua',
@@ -13,6 +13,7 @@ client_scripts {
     'libs/*.lua',
     'client/main.lua',
     'client/monitoring.lua',
+
 }
 
 server_scripts {

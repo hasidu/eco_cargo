@@ -21,7 +21,7 @@ Locales['hu'] = {
     ['mission_start_alert'] = 'Értékes szállítmány indult! Helyzete látható a GPS-en!',
     ['a_mission_is_already_in_progress'] = 'Egy küldetés már folyamatban van, nem tudsz újabbat indítani',
     ['no_information'] = 'Nincs információ',
-    ['mission_trailer_signal'] = 'Karaván',
+    ['mission_trailer_signal'] = 'Konvoj',
     ['found_defenders'] = '%s védő van a körzetedben',
     ['please_wait'] = 'Várj %s másodpercet',
     ['loading_point_marked'] = 'A kiinduló pont jelölve a térképeden!',
@@ -32,6 +32,7 @@ Locales['hu'] = {
     ['too_few_defensive_players_available'] = 'Az értesíthető játékosok száma nem éri el a miminumot',
     ['too_few_counter_players_available'] = 'Túl kevés lehetséges ellenfél található',
     ['cargo_not_available'] = 'Sajnos ez a szállítmány nem érhető el még %s %s-ig',
+    ['disable_mission_start_for_defenders'] = 'Nem indíthatsz küldetést, ha a frakciód védi',
 
     ['money'] = 'Készpénz',
     ['bank'] = 'Bankszámla',
@@ -52,7 +53,7 @@ Locales['hu'] = {
     ['yakuza'] = 'Łowcy Jeleni',
     ['lostmc'] = 'Lost MC',
     ['cayoperico'] = 'Cayo Perico Military',
-    ['unemployed'] = 'Münkanélküli',
+    ['unemployed'] = 'Munkanélküli',
 
     -- TRAITS
     ['fragile'] = 'Törékeny',
@@ -153,4 +154,5 @@ Locales['hu'] = {
     ['hand_tools'] = 'Kéziszerszám',
     ['weapons'] = 'Fegyverek',
     ['motorcycles'] = 'Motorkerékpárok',
+    ['egg'] = 'Tojás',
 }

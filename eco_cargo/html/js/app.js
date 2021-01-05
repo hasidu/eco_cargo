@@ -1,3 +1,10 @@
+let disableMissionStartForDefenders = false;
+let missionOrderBy = 'all_started';
+let missionStatReloadTime = 0;
+let floodProtectionTime = 3; // in sec
+let floodMessage = ('Flood védelem: Várj %s másodpercet').format(floodProtectionTime);
+
+
 function closePage() {
 
     let page = $('#page');
@@ -102,9 +109,15 @@ function playerIsDefender(missionList, player) {
 
 function playerIsConfidential(mission, player) {
 
-    if (player.group === 'superadmin') { return true }
-    if (player.identifier === mission.owner.identifier) { return true }
-    if (player.job.name === mission.defender) { return true }
+    if (player.group === 'superadmin') {
+        return true
+    }
+    if (player.identifier === mission.owner.identifier) {
+        return true
+    }
+    if (player.job.name === mission.defender) {
+        return true
+    }
 
     return false
 }
@@ -114,6 +127,7 @@ function openCargoSelect(shipments, currentZone, player, mission) {
     if (!$.isEmptyObject(shipments)) {
 
         let pageWrapper = $(".pageWrapper");
+        pageWrapper.find(".titleContainer").css("display", "block");
         let page = $("#page");
 
 
@@ -134,8 +148,10 @@ function openCargoSelect(shipments, currentZone, player, mission) {
 
 
             let missionInfo = inMission(cargo, currentZone, player, mission);
-            let isDisabled = cargo.remainingTime !== 0;
+            let remainingTime = cargo.remainingTime !== 0;
+            let playerInDefenderJob = player.job.name === cargo.defender;
             let properties = jsonParse(cargo.properties);
+
 
             let cargoItem = cargoItemTmp.clone();
             cargoItem.css("display", "grid");
@@ -149,7 +165,7 @@ function openCargoSelect(shipments, currentZone, player, mission) {
                     let tr = cargoDestinationTableRow.clone();
                     tr.removeClass("template");
 
-                    if (isDisabled) {
+                    if (remainingTime || (playerInDefenderJob && disableMissionStartForDefenders)) {
 
                         tr.addClass("disabled");
 
@@ -217,11 +233,18 @@ function openCargoSelect(shipments, currentZone, player, mission) {
             cargoItem.find(".icons").html(icons(properties));
 
 
-            if (isDisabled) {
+            if (remainingTime || (playerInDefenderJob && disableMissionStartForDefenders)) {
 
                 cargoItem.find(".itemHeader").addClass("disabled");
                 cargoItem.find(".availableAlert").addClass("noAvailable");
-                cargoItem.find(".availableAlert").html(cargo.remainingTimeDisplay);
+
+                if (remainingTime) {
+
+                    cargoItem.find(".availableAlert").html(cargo.remainingTimeDisplay);
+                } else if (playerInDefenderJob && disableMissionStartForDefenders) {
+
+                    cargoItem.find(".availableAlert").html('Védőként nem indítható');
+                }
             }
 
 
@@ -347,6 +370,7 @@ function openMissionList(missionList, player) {
     if (!$.isEmptyObject(missionList)) {
 
         let pageWrapper = $(".pageWrapper");
+        pageWrapper.find(".titleContainer").css("display", "block");
         let page = $("#page");
 
         let isDefender = playerIsDefender(missionList, player);
@@ -583,6 +607,8 @@ function openMaintenance(data) {
     if (!$.isEmptyObject(data)) {
 
         let pageWrapper = $(".pageWrapper");
+        pageWrapper.find(".titleContainer").css("display", "none");
+
         let page = $("#page");
         page.empty();
 
@@ -607,7 +633,6 @@ function openMaintenance(data) {
 
         mntTmp.find(".orphanProduct").html(orphanProductHtml);
         mntTmp.find(".orphanProductMarker").addClass((orphanProductHtml === 0) ? 'good' : 'fault');
-
 
         mntTmp.find(".countRoutes").html(data.countRoutes);
         mntTmp.find(".countRoutesMarker").addClass((data.countRoutes > 0) ? 'good' : 'fault');
@@ -647,7 +672,6 @@ function openMaintenance(data) {
 
             missingActionPointsHtml = '<ul>';
 
-            //for (let i = 0; i < data.missingActionPoints.length; i++) {
             jQuery.each(data.missingActionPoints, function (k, v) {
 
                 missingActionPointsHtml += ("<li>Zone: %s, Product: %s. %s</li>").format(
@@ -685,6 +709,9 @@ function openMaintenance(data) {
         mntTmp.find(".orphanActionPointsMarker").addClass((orphanActionPointsHtml === 0) ? 'good' : 'fault');
 
 
+        mntTmp.find(".missingLocales").html(JSON.stringify(data.missingLocales));
+
+
         // SUBMIT BTN
         let distanceBtn = mntTmp.find(".distanceBtn");
         distanceBtn.click(function () {
@@ -705,47 +732,192 @@ function openMaintenance(data) {
 
 }
 
-function openStatistics(data) {
+function openStatistics(data, statType) {
 
-    if (!$.isEmptyObject(data)) {
+    statType = statType || 'myStatistics';
 
-        let pageWrapper = $(".pageWrapper");
-        let page = $("#page");
-        page.empty();
 
-        let statTmp = $(".statistics").clone();
-        statTmp.removeClass("template");
+    let pageWrapper = $(".pageWrapper");
+    pageWrapper.find(".titleContainer").css("display", "none");
 
-        statTmp.find(".qualityRate").html(("%s%").format(data.quality_rate));
-        statTmp.find(".successRate").html(("%s%").format(data.success_rate));
+    let page = $("#page");
+    page.empty();
 
-        statTmp.find(".distance").html(data.distance);
-        statTmp.find(".workingTime").html(data.working_time);
+    let statisticsContainer = $(".statisticsContainer").clone();
+    statisticsContainer.removeClass("template");
 
-        statTmp.find(".timeUnit").html(data.working_time_unit);
-        statTmp.find(".registeredTime").html(data.registered);
+    let statisticsContent = statisticsContainer.find(".statisticsContent");
 
-        statTmp.find(".allStarted").html(data.all_started);
-        statTmp.find(".startedMission").html(data.started_mission);
-        statTmp.find(".startedDelivery").html(data.started_delivery);
+    let myStatisticsBtn = statisticsContainer.find("#myStatisticsBtn");
+    let summaryStatisticsBtn = statisticsContainer.find("#summaryStatisticsBtn");
 
-        statTmp.find(".allDone").html(data.all_done);
-        statTmp.find(".doneMission").html(data.done_mission);
-        statTmp.find(".doneDelivery").html(data.done_delivery);
+    if (statType === 'allStatistics') {
 
-        statTmp.find(".defender").html(data.defender);
+        myStatisticsBtn.click(function () {
 
-        statTmp.find(".allStolen").html(data.all_stolen);
-        statTmp.find(".stolenMission").html(data.stolen_mission);
-        statTmp.find(".stolenDelivery").html(data.stolen_delivery);
+            if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
 
-        statTmp.find(".destroyedTrailer").html(data.destroyed_trailer);
+                missionStatReloadTime = getTimeStamp();
+                $.post('https://eco_cargo/myStatistics', JSON.stringify({}));
+            } else {
 
-        statTmp.appendTo(page);
+                ShowNotification({type: 'warning', text: floodMessage});
+            }
+            return false;
+        });
 
-        pageWrapper.css("display", "block");
-        page.css("display", "block");
+    } else {
+
+        summaryStatisticsBtn.click(function () {
+
+            if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
+
+                missionStatReloadTime = getTimeStamp();
+
+                $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
+
+                    orderBy: missionOrderBy
+                })).then(
+                    resp => {
+
+                        openStatistics(jsonParse(resp), 'allStatistics')
+                    }
+                );
+            } else {
+
+                ShowNotification({type: 'warning', text: floodMessage});
+            }
+
+            return false;
+        });
+
     }
+
+
+    if (statType === 'allStatistics') {
+
+        if (!$.isEmptyObject(data)) {
+
+            let summaryStatistics = $(".summaryStatistics").clone();
+            summaryStatistics.removeClass("template");
+
+            let table = summaryStatistics.find(".summaryStatisticsTable");
+            let trTemp = table.find(".summaryStatisticsTableTr");
+            table.removeClass("template");
+
+            for (let i = 0; i < data.length; i++) {
+
+                let cData = data[i];
+
+                let tr = trTemp.clone();
+                tr.removeClass("template");
+
+                prepareStatData(cData);
+
+                tr.find(".ranking").html(i + 1);
+                tr.find(".summaryStatValueName").html(("%s %s").format(cData.firstname, cData.lastname));
+                tr.find(".summaryStatValueDistance").html(cData.distance);
+                tr.find(".summaryStatValueAllStarted").html(cData.all_started);
+                tr.find(".summaryStatValueAllDone").html(cData.all_done);
+                tr.find(".summaryStatValueVulnerable").html(cData.vulnerable);
+                tr.find(".summaryStatValueWorkingTime").html(("%s %s").format(cData.working_time, cData.working_time_unit));
+                tr.find(".summaryStatValueQualityRate").html(("%s%").format(cData.quality_rate));
+                tr.find(".summaryStatValueSuccessRate").html(("%s%").format(cData.success_rate));
+                tr.find(".summaryStatValueRegistered").html(cData.registered);
+                tr.find(".summaryStatValueLastActivity").html(cData.last_activity);
+
+                tr.appendTo(table);
+            }
+
+            summaryStatistics.appendTo(statisticsContent);
+
+            let th = table.find("th");
+
+            th.click(function () {
+
+                if ($(this).data('orderby') !== undefined) {
+
+                    if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
+
+                        missionStatReloadTime = getTimeStamp();
+                        missionOrderBy = $(this).data('orderby');
+
+                        $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
+
+                            orderBy: missionOrderBy
+                        })).then(
+                            resp => {
+
+                                openStatistics(jsonParse(resp), 'allStatistics')
+                            }
+                        );
+
+                    } else {
+
+                        ShowNotification({type: 'warning', text: floodMessage});
+                    }
+                }
+
+
+                return false;
+            });
+
+            for (let i=0; i < th.length; i++) {
+
+                if (th[i].dataset.orderby === missionOrderBy) {
+
+                    th[i].classList.add('currentOrder');
+                }
+            }
+        }
+
+    } else {
+
+        if (!$.isEmptyObject(data)) {
+
+            prepareStatData(data);
+
+            let myStatistics = $(".myStatistics").clone();
+            myStatistics.removeClass("template");
+
+
+            myStatistics.find(".qualityRate").html(("%s%").format(data.quality_rate));
+            myStatistics.find(".successRate").html(("%s%").format(data.success_rate));
+
+            myStatistics.find(".distance").html(data.distance);
+            myStatistics.find(".workingTime").html(data.working_time);
+
+            myStatistics.find(".timeUnit").html(data.working_time_unit);
+            myStatistics.find(".registeredTime").html(data.registered);
+
+            myStatistics.find(".allStarted").html(data.all_started);
+            myStatistics.find(".startedMission").html(data.started_mission);
+            myStatistics.find(".startedDelivery").html(data.started_delivery);
+
+            myStatistics.find(".allDone").html(data.all_done);
+            myStatistics.find(".allDone").html(data.all_done);
+            myStatistics.find(".doneMission").html(data.done_mission);
+            myStatistics.find(".doneDelivery").html(data.done_delivery);
+
+            myStatistics.find(".vulnerable").html(data.vulnerable);
+            myStatistics.find(".defender").html(data.defender);
+
+            myStatistics.find(".allStolen").html(data.all_stolen);
+            myStatistics.find(".stolenMission").html(data.stolen_mission);
+            myStatistics.find(".stolenDelivery").html(data.stolen_delivery);
+
+            myStatistics.find(".destroyedTrailer").html(data.destroyed_trailer);
+
+            myStatistics.appendTo(statisticsContent);
+
+        }
+
+    }
+
+    statisticsContainer.appendTo(page);
+    pageWrapper.css("display", "block");
+    page.css("display", "block");
+
 
 }
 
@@ -801,6 +973,7 @@ window.addEventListener('message', function (event) {
 
             closePage();
             closeHud('.aInfo');
+            disableMissionStartForDefenders = item.disableMissionStartForDefenders;
             openCargoSelect(item.data, item.currentZone, item.player, item.mission);
             break;
 
@@ -824,15 +997,8 @@ window.addEventListener('message', function (event) {
 
         case 'STATISTICS':
 
-            if (item.operation === 'open') {
-
-                closePage();
-                openStatistics(item.data);
-
-            } else if (item.operation === 'update') {
-
-                console.log('update')
-            }
+            closePage();
+            openStatistics(item.data);
             break;
 
         case 'CLOSE_PAGE':
@@ -860,12 +1026,3 @@ $(document).keyup(function (key) {
     }
 });
 
-const MONEY = new Intl.NumberFormat('en-US',
-    {
-        style: 'currency', currency: 'USD',
-        minimumFractionDigits: 0
-    });
-
-String.prototype.format = function () {
-    return [...arguments].reduce((p, c) => p.replace(/%s/, c), this);
-};

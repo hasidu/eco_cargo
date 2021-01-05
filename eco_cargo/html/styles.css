@@ -494,9 +494,12 @@ label {
     text-align: right;
 }
 
+
 .tblTheme2 tr {
     background: #f42632;
 }
+
+
 
 .payable {
     font-size: 16px;
@@ -820,7 +823,16 @@ label {
 
 /* STATISTICS */
 
-.statisticsContainer {
+.statisticsMenu {
+    display: block;
+    margin: 0 auto;
+}
+
+.statisticsMenu li {
+    display: inline-block;
+}
+
+.statisticsContent {
     display: block;
     position: relative;
     margin: 0 auto;
@@ -896,4 +908,48 @@ label {
     margin-right: 10px;
     text-align: center;
     line-height: 110px;
+}
+
+
+.summaryStatHeadName, .summaryStatValueName {
+    text-align: left !important;
+}
+
+.currentOrder {
+    background-color: #155988 !important;
+}
+
+.tblTheme3 {
+
+    color: #fdf9ec;
+}
+
+.tblTheme3 td {
+
+    margin: 0;
+    padding: 15px;
+    text-align: right;
+    border: none;
+}
+
+.tblTheme3 th {
+
+    margin: 0;
+    padding: 5px 15px;
+    background: #152e59;
+    text-align: right;
+}
+
+.tblTheme3 tr {
+    background: #155988;
+}
+
+.tblTheme3 tr:nth-child(2n) {
+    background: #156494;
+}
+
+/* DIAGNOSTICS */
+
+.missingLocales {
+    color: #da4453;
 }
