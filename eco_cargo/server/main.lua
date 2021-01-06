@@ -555,7 +555,7 @@ AddEventHandler('eco_cargo:missionUpdate', function(data, subject)
 
                 if currentMission.joined[i] == data.player.identifier then
 
-                    currentMission.joined[i] = nil
+                    table.remove(currentMission.joined, i)
                 end
             end
 
