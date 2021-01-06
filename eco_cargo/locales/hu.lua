@@ -33,6 +33,7 @@ Locales['hu'] = {
     ['too_few_counter_players_available'] = 'Túl kevés lehetséges ellenfél található',
     ['cargo_not_available'] = 'Sajnos ez a szállítmány nem érhető el még %s %s-ig',
     ['disable_mission_start_for_defenders'] = 'Nem indíthatsz küldetést, ha a frakciód védi',
+    ['incorrect_setting'] = 'Helytelen script beállitás',
 
     ['money'] = 'Készpénz',
     ['bank'] = 'Bankszámla',

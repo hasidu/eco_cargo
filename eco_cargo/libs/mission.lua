@@ -14,7 +14,6 @@ RegisterNUICallback('missionRegister', function(data, cb)
         targetPlayers = countPlayers(data.defender)
     end
 
-
     if not ECO.MONITOR.callDefenseTime or ECO.MONITOR.callDefenseTime < time then
 
         if targetPlayers > 0 then
@@ -36,7 +35,6 @@ RegisterNUICallback('missionRegister', function(data, cb)
 
                 counters = counters + countPlayers(counterFactions[i])
             end
-
 
             if counters >= data.required_defenders then
 
@@ -103,6 +101,13 @@ RegisterNUICallback('checkDefense', function(data, cb)
 
             ECO.MONITOR.checkDefenseTime = time + 10000
             TriggerServerEvent('eco_cargo:showCountingZone', GetEntityCoords(_PlayerPedId))
+        else
+
+            cb(json.encode({
+                state = false,
+                type = "warning",
+                message = _('incorrect_setting')
+            }))
         end
     else
 

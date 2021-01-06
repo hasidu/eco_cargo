@@ -9,6 +9,8 @@ ECO = {
     loadingZonesIds = {}
 }
 
+
+
 ESX.RegisterServerCallback('eco_cargo:getMission', function(source, cb)
 
     cb(ECO.MISSION)
@@ -266,7 +268,7 @@ end)
 
 AddEventHandler('esx:playerDropped', function(playerId)
 
-    table.remove(ECO.PLAYERS, playerId)
+    ECO.PLAYERS[playerId] = nil
     TriggerClientEvent('eco_cargo:updatePlayers', -1, ECO.PLAYERS)
 end)
 
@@ -316,7 +318,7 @@ AddEventHandler('eco_cargo:cargoRegister', function(ecoCargo)
 
 
     if ecoCargo.params.damageRoll < 10 or
-       ecoCargo.params.collisionSensitivity < 100 then
+            ecoCargo.params.collisionSensitivity < 100 then
 
         isVulnerable = true
     end
@@ -480,7 +482,7 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
                         ['@defender'] = 1,
                     }, function(rowsChanged)
 
-                        print("STAT DEFNDERS INSERT OK", rowsChanged, defenders[i])
+                        print("STAT DEFENDERS INSERT OK", rowsChanged, defenders[i])
                     end)
             end
         end
@@ -554,7 +556,7 @@ AddEventHandler('eco_cargo:missionUpdate', function(data, subject)
             for i = 1, #currentMission.joined do
 
                 if currentMission.joined[i] == data.player.identifier then
-
+                    
                     table.remove(currentMission.joined, i)
                 end
             end
@@ -607,6 +609,7 @@ AddEventHandler('eco_cargo:missionRegister', function(data)
         TriggerClientEvent('eco_cargo:missionUpdate', -1, ECO.MISSION)
     end
 
+
     -- BROADCAST
     data.showChat = true
     data.type = "information"
@@ -641,7 +644,7 @@ AddEventHandler('eco_cargo:updateDistance', function(data)
                 ['@route'] = v.route
             }, function(rowsChanged)
 
-                print("INSERT OK", rowsChanged)
+                print("DISTANCES INSERT OK", rowsChanged)
             end)
     end
 end)
@@ -655,7 +658,7 @@ AddEventHandler('eco_cargo:deleteDistance', function(data)
 
             function(rowsChanged)
 
-                print("deleteDistance OK", rowsChanged)
+                print("DISTANCES DELETE OK", rowsChanged)
             end)
     end
 end)
