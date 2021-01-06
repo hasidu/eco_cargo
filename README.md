@@ -1,4 +1,5 @@
-# ECO CARGO
+# ECO CARGO - FRISSITVE! 
+Érdemes visszanézni, mert az első verzó óta javítások, bővítések lettek! Továbbiakban is várható...
 Kamionos munka - freight work for FiveM (ESX)
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
