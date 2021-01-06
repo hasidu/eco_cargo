@@ -266,7 +266,7 @@ end)
 
 AddEventHandler('esx:playerDropped', function(playerId)
 
-    ECO.PLAYERS[playerId] = nil
+    table.remove(ECO.PLAYERS, playerId)
     TriggerClientEvent('eco_cargo:updatePlayers', -1, ECO.PLAYERS)
 end)
 
