@@ -34,6 +34,8 @@ Locales['hu'] = {
     ['cargo_not_available'] = 'Sajnos ez a szállítmány nem érhető el még %s %s-ig',
     ['disable_mission_start_for_defenders'] = 'Nem indíthatsz küldetést, ha a frakciód védi',
     ['incorrect_setting'] = 'Helytelen script beállitás',
+    ['tempomat_speed'] = 'Tempomat: %s Km/h',
+
 
     ['money'] = 'Készpénz',
     ['bank'] = 'Bankszámla',
@@ -53,6 +55,7 @@ Locales['hu'] = {
     ['family'] = 'Ndrangheta',
     ['yakuza'] = 'Łowcy Jeleni',
     ['lostmc'] = 'Lost MC',
+    ['cardem'] = 'Car Demolition',
     ['cayoperico'] = 'Cayo Perico Military',
     ['unemployed'] = 'Munkanélküli',
 
@@ -156,4 +159,6 @@ Locales['hu'] = {
     ['weapons'] = 'Fegyverek',
     ['motorcycles'] = 'Motorkerékpárok',
     ['egg'] = 'Tojás',
+    ['moc'] = 'Mobil Műveleti Központ',
+    ['animals'] = 'Élő állat',
 }

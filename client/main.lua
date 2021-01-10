@@ -263,7 +263,6 @@ Citizen.CreateThread(function()
                         local societyAmount = tonumber(report.payData.defenderSocietyPayable)
                         local moneyType = ECO.CARGO.stolen and Config.stolenCargoPaymentType or 'money'
 
-
                         if type(amount) == 'number' and amount > 0 then
 
                             TriggerServerEvent('eco_cargo:addMoney', amount, moneyType)
@@ -348,7 +347,7 @@ Citizen.CreateThread(function()
 
                 if item then
 
-                    DrawMarker(23, item['actionpoint'][1][1], 0.0, 0.0, 0.0, 0, 0.0, 0.0, 6.0, 6.0, 0.5, 255, 0, 0, 355, false, false, 2, false, false, false, false)
+                    DrawMarker(23, item['actionpoint'][1][1], 0.0, 0.0, 0.0, 0, 0.0, 0.0, 6.0, 6.0, 0.5, 255, 0, 0, 255, false, false, 2, false, false, false, false)
                 end
             end
         else

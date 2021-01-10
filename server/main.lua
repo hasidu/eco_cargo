@@ -4,7 +4,36 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 ECO = {
     CARGO = {},
     PLAYERS = {},
-    MISSION = {},
+    MISSION = {--[[['31_56'] = {
+            owner = {
+                group = 'superadmin',
+                isApprovedDriver = true,
+                identifier = 'steam:110000103164c14',
+                job = {
+                    skin_female = {},
+                    label = 'LSPD',
+                    skin_male = {},
+                    grade_label = 'Officer',
+                    name = 'police',
+                    grade_salary = 40,
+                    grade = 1,
+                    grade_name = 'officer',
+                },
+                dateOfBirth = '1976-11-03',
+                serverId = 1,
+                coords = vector3(3624.053, 3764.666, 29.01301),
+                characterName = 'Roy Beállitott Tucker',
+                permissionLevel = 0,
+                cargoRequestTime = 0,
+            },
+            trailerPlate = '45CXC200',
+            defender = 'police',
+            destinationZoneId = 66,
+            joined = {
+                'steam:110000103164c15', 'steam:110000103164c16', 'steam:110000103164c17', 'steam:110000103164c18'
+            }
+        }]]
+    },
     PRODUCTS = {},
     loadingZonesIds = {}
 }
@@ -556,7 +585,7 @@ AddEventHandler('eco_cargo:missionUpdate', function(data, subject)
             for i = 1, #currentMission.joined do
 
                 if currentMission.joined[i] == data.player.identifier then
-                    
+
                     table.remove(currentMission.joined, i)
                 end
             end

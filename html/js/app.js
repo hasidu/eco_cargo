@@ -1,6 +1,6 @@
 let disableMissionStartForDefenders = false;
 let missionOrderBy = 'all_started';
-let missionStatReloadTime = 0;
+let lastEventTime = 0;
 let floodProtectionTime = 3; // in sec
 let floodMessage = ('Flood védelem: Várj %s másodpercet').format(floodProtectionTime);
 
@@ -13,21 +13,6 @@ function closePage() {
     page.empty();
 
     $('.pageWrapper').css("display", "none");
-}
-
-function jsonParse(str) {
-
-    if (typeof (str) === "undefined" || jQuery.trim(str) === "") {
-        return false
-    }
-
-    try {
-
-        return (JSON.parse(str));
-    } catch (e) {
-
-        return false;
-    }
 }
 
 function icons(properties) {
@@ -393,7 +378,7 @@ function openMissionList(missionList, player) {
             let isConfidentialPlayer = playerIsConfidential(mission, player);
 
             let missionOwnerHtml = isConfidentialPlayer ? mission.owner.characterName : 'Bizalmas információ';
-            let missionJoinedHtml = isConfidentialPlayer ? mission.joined.length : '?';
+            let missionJoinedHtml = isConfidentialPlayer ? Object.keys(mission.joined).length : '?';
             let missionDefenderHtml = isConfidentialPlayer ? mission.product.defenderLabel : '?';
 
             //CARGO HEADER
@@ -443,44 +428,63 @@ function openMissionList(missionList, player) {
             // JOIN BTN
             if (mission.owner.identifier !== player.identifier && !isDefender && mission.product.defender === player.job.name) {
 
-                let joinBtn = missionItem.find(".join");
 
-                joinBtn.removeClass('hide');
-                joinBtn.click(function () {
+                if (lastEventTime + floodProtectionTime < getTimeStamp()) {
 
-                    $.post('https://eco_cargo/missionJoin', JSON.stringify({
-                        missionId: key,
-                        defender: mission.product.defender,
-                        owner: mission.owner,
-                        player: player
-                    }));
+                    lastEventTime = getTimeStamp();
 
-                    joinBtn.remove();
-                    closePage();
-                    return false;
-                });
+                    let joinBtn = missionItem.find(".join");
+
+                    joinBtn.removeClass('hide');
+                    joinBtn.click(function () {
+
+                        $.post('https://eco_cargo/missionJoin', JSON.stringify({
+                            missionId: key,
+                            defender: mission.product.defender,
+                            owner: mission.owner,
+                            player: player
+                        }));
+
+                        joinBtn.remove();
+                        closePage();
+                        return false;
+                    });
+
+                } else {
+
+                    ShowNotification({type: 'warning', text: floodMessage});
+                }
             }
 
 
             // LEAVE BTN
             if (mission.owner.identifier !== player.identifier && key === isDefender) {
 
-                let leaveBtn = missionItem.find(".leave");
+                if (lastEventTime + floodProtectionTime < getTimeStamp()) {
 
-                leaveBtn.removeClass('hide');
-                leaveBtn.click(function () {
+                    lastEventTime = getTimeStamp();
 
-                    $.post('https://eco_cargo/missionLeave', JSON.stringify({
-                        missionId: key,
-                        defender: mission.product.defender,
-                        owner: mission.owner,
-                        player: player
-                    }));
+                    let leaveBtn = missionItem.find(".leave");
 
-                    leaveBtn.remove();
-                    closePage();
-                    return false;
-                });
+                    leaveBtn.removeClass('hide');
+                    leaveBtn.click(function () {
+
+                        $.post('https://eco_cargo/missionLeave', JSON.stringify({
+                            missionId: key,
+                            defender: mission.product.defender,
+                            owner: mission.owner,
+                            player: player
+                        }));
+
+                        leaveBtn.remove();
+                        closePage();
+                        return false;
+                    });
+
+                } else {
+
+                    ShowNotification({type: 'warning', text: floodMessage});
+                }
             }
 
 
@@ -723,6 +727,17 @@ function openMaintenance(data) {
             return false;
         });
 
+        // SHOW ZONES BTN
+        let showAllActionPointBtn = mntTmp.find(".showAllActionPointBtn");
+        showAllActionPointBtn.click(function () {
+
+            $.post('https://eco_cargo/showAllActionPoints', JSON.stringify({}));
+
+            showAllActionPointBtn.remove();
+            closePage();
+            return false;
+        });
+
 
         mntTmp.appendTo(page);
 
@@ -755,9 +770,10 @@ function openStatistics(data, statType) {
 
         myStatisticsBtn.click(function () {
 
-            if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
+            if (lastEventTime + floodProtectionTime < getTimeStamp()) {
 
-                missionStatReloadTime = getTimeStamp();
+                lastEventTime = getTimeStamp();
+
                 $.post('https://eco_cargo/myStatistics', JSON.stringify({}));
             } else {
 
@@ -770,9 +786,9 @@ function openStatistics(data, statType) {
 
         summaryStatisticsBtn.click(function () {
 
-            if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
+            if (lastEventTime + floodProtectionTime < getTimeStamp()) {
 
-                missionStatReloadTime = getTimeStamp();
+                lastEventTime = getTimeStamp();
 
                 $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
 
@@ -837,9 +853,10 @@ function openStatistics(data, statType) {
 
                 if ($(this).data('orderby') !== undefined) {
 
-                    if (missionStatReloadTime + floodProtectionTime < getTimeStamp()) {
+                    if (lastEventTime + floodProtectionTime < getTimeStamp()) {
 
-                        missionStatReloadTime = getTimeStamp();
+                        lastEventTime = getTimeStamp();
+
                         missionOrderBy = $(this).data('orderby');
 
                         $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
@@ -862,7 +879,7 @@ function openStatistics(data, statType) {
                 return false;
             });
 
-            for (let i=0; i < th.length; i++) {
+            for (let i = 0; i < th.length; i++) {
 
                 if (th[i].dataset.orderby === missionOrderBy) {
 

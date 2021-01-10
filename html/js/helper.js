@@ -22,7 +22,7 @@ function displayElapsedTime(elapsedTime) {
     }
 
     let hours = Math.floor(elapsedTime / 3600);
-    let minutes = ((Math.floor((elapsedTime % 3600) / 60) / 60).toPrecision(1)) * 1;
+    let minutes = ((Math.floor((elapsedTime % 3600) / 3600)).toPrecision(1)) * 1;
 
     if (hours < 1) {
 
@@ -34,13 +34,28 @@ function displayElapsedTime(elapsedTime) {
     return {time: hours + minutes, unit: 'h'}
 }
 
+function jsonParse(str) {
+
+    if (typeof (str) === "undefined" || jQuery.trim(str) === "") {
+
+        return false
+    }
+    try {
+
+        return (JSON.parse(str));
+    } catch (e) {
+
+        return false;
+    }
+}
+
 function prepareStatData(data) {
 
     let displayTime = displayElapsedTime(data.working_time);
 
     data.distance = (data.distance * 1).toFixed(1);
-    data.quality_rate = (data.quality_rate * 1).toFixed(1);
-    data.success_rate = (data.success_rate * 1).toFixed(1);
+    data.quality_rate = data.quality_rate ? (data.quality_rate * 1).toFixed(1) : 0;
+    data.success_rate = data.success_rate ? (data.success_rate * 1).toFixed(1) : 0;
     data.working_time = (displayTime.time * 1).toFixed(1);
     data.working_time_unit = displayTime.unit;
     data.registered = millisecond2date(data.registered, 'hu-HU');
