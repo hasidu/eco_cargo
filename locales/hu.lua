@@ -35,12 +35,9 @@ Locales['hu'] = {
     ['disable_mission_start_for_defenders'] = 'Nem indíthatsz küldetést, ha a frakciód védi',
     ['incorrect_setting'] = 'Helytelen script beállitás',
     ['tempomat_speed'] = 'Tempomat: %s Km/h',
-
-
     ['money'] = 'Készpénz',
     ['bank'] = 'Bankszámla',
     ['black_money'] = 'Piszkos pénz',
-
     ['hour'] = 'óra',
     ['minute'] = 'perc',
     ['sec'] = 'másodperc',
@@ -69,7 +66,20 @@ Locales['hu'] = {
     ['explosive'] = 'Robbanásveszélyes',
     ['high_value'] = 'Nagyértékű',
     ['heavy'] = 'Nehéz',
-    ['illegal'] = 'Körözött!',
+    ['illegal'] = 'Körözés alatt',
+    ['marked_on_the_map'] = 'Jelölt árú',
+
+    -- RANKS
+    ['rank1'] = 'Kezdő',
+    ['rank2'] = 'Lelkes',
+    ['rank3'] = 'Szakképzett',
+    ['rank4'] = 'Profi',
+    ['rank5'] = 'Mester',
+    ['rank6'] = 'Oktató',
+    ['rank7'] = 'Elit',
+    ['rank8'] = 'Az út királya',
+    ['rank9'] = 'Legenda',
+    ['rank10'] = 'Isteni bajnok',
 
     -- PRODUCTS
     ['oil'] = 'Nyers olaj',
@@ -90,7 +100,7 @@ Locales['hu'] = {
     ['seeds'] = 'Magok',
     ['boiler_part'] = 'Kazán alkatrész',
     ['boric_acid'] = 'Bórsav',
-    ['machine_part'] = 'Munkagép alkatrész',
+    ['machine_part'] = 'Gépalkatrész',
     ['cars'] = 'Autók',
     ['brake_fluid'] = 'Fékfolyadék',
     ['canned_beef'] = 'Marhahús konzerv',
@@ -157,8 +167,14 @@ Locales['hu'] = {
     ['caesium'] = 'Cézium',
     ['hand_tools'] = 'Kéziszerszám',
     ['weapons'] = 'Fegyverek',
-    ['motorcycles'] = 'Motorkerékpárok',
     ['egg'] = 'Tojás',
     ['moc'] = 'Mobil Műveleti Központ',
     ['animals'] = 'Élő állat',
+    ['lens'] = 'Teleszkóp lencse',
+    ['artwork'] = 'Műtárgy',
+    ['cement'] = 'Cement',
+    ['rock'] = 'Kőzet',
+    ['disassembled_part'] = 'Bontott alaktrészek',
+    ['military_communication_device'] = 'Katonai kommunikációs eszköz',
+    ['life_support_equipment'] = 'Életfenntartó berendezés'
 }

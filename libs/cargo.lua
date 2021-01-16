@@ -61,7 +61,8 @@ function setRoute(coord)
     --SetWaypointOff()
     ClearAllBlipRoutes()
 
-    if next(ECO.blips) ~= nil then removeBlips() end
+    removeBlips(ECO.blips)
+    ECO.blips = {}
 
     local blip = AddBlipForCoord(coord)
 
@@ -122,7 +123,9 @@ function setZones()
     else
 
         ECO.zones = {}
-        removeBlips()
+
+        removeBlips(ECO.blips)
+        ECO.blips = {}
     end
 
     ECO.LOADED.zones = presetName
@@ -132,8 +135,7 @@ function setBlips(zoneList)
 
     if type(zoneList) ~= 'table' or next(zoneList) == nil then return end
 
-    if next(ECO.blips) ~= nil then removeBlips() end
-
+    removeBlips(ECO.blips)
     ECO.blips = {}
 
     for k, v in pairs(zoneList) do
@@ -150,16 +152,9 @@ function setBlips(zoneList)
     end
 end
 
-function removeBlips()
-
-    if next(ECO.blips) == nil then return end
-
-    for _, v in pairs(ECO.blips) do
-
-        RemoveBlip(v)
-    end
-
-    ECO.blips = {}
+function removeBlips(blips)
+    if type(blips) ~= 'table' or next(blips) == nil then return end
+    for _, v in pairs(blips) do RemoveBlip(v) end
 end
 
 function cargoPreset(productId)

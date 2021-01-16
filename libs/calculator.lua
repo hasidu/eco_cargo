@@ -117,11 +117,11 @@ function calculateParams(propertyNames)
         damageRoll = 80,
         collisionSensitivity = 1000,
         impactFlash = 1000,
-        illegal = 0
+        illegal = 0,
+        marked_on_the_map = 0
     }
 
     if propertyNames and next(propertyNames) ~= nil then
-
 
         for i = 1, #propertyNames do
 
@@ -137,6 +137,7 @@ function calculateParams(propertyNames)
                 setProperty(property, params, 'collisionSensitivity', 'min')
                 setProperty(property, params, 'impactFlash', 'min')
                 setProperty(property, params, 'illegal', 'max')
+                setProperty(property, params, 'marked_on_the_map', 'max')
             end
         end
     end

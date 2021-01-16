@@ -152,12 +152,9 @@ Citizen.CreateThread(function()
 
         if ECO.MONITOR.towing then
 
-            for _, v in pairs(ECO.MISSION) do
+            if ECO.CARGO.params and ECO.CARGO.params.marked_on_the_map == 1 then
 
-                if ECO.MONITOR.trailerPlate == v.trailerPlate then
-
-                    TriggerServerEvent('eco_cargo:trailerSignal', ECO.CARGO.coords, true)
-                end
+                TriggerServerEvent('eco_cargo:trailerSignal', ECO.CARGO.coords, ECO.MONITOR.trailerPlate, true)
             end
         end
     end

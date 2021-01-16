@@ -1,4 +1,13 @@
--- ECO CARGO
+# ECO CARGO 
+Érdemes visszanézni, mert az első verzó óta javítások, bővítések történtek, melyek a továbbiakban is várhatók...
+Kamionos munka - freight work for FiveM (ESX)
+https://www.youtube.com/watch?v=Q2TpDI_MPdI
+
+Konvoj videó:
+https://youtu.be/8f7a2wVr2HU
+
+![ecocargo gallery](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_gallery.jpg)
+[Képek](https://postimg.cc/gallery/hmm2bTb)
 
 FONTOS: Ha több karakteres rendszert használsz:
 
@@ -16,7 +25,7 @@ AddEventHandler('kashactersC:SpawnCharacter', function(spawn, isnew)
 end)
 
 
--- MISSZIÓK
+## MISSZIÓK
 
     Az alábbi listákat a config.lua-ban állitsd be
 
@@ -27,7 +36,8 @@ end)
         Config.illegalFactions
 
 
--- PARANCSOK
+
+## PARANCSOK
 
     ADMIN:
     -- /cargodiag   -- Adatbázis karbantartás
@@ -36,14 +46,11 @@ end)
     -- /inspect     -- A trailer mellé állva lekéri a szállítólevelet
     -- /mission     -- Küldetéslista
     -- /cargostat   -- Játékosok fuvar statisztikája
-    -- /closenui    -- Nui bezárási problémák esetére
+    -- /closenui
     
-    
--- TEMPOMAT (beépítve: RP Friendly Cruise Control/Speed Limiter (https://github.com/hojgr/teb_speed_control))
+## TEMPOMAT (beépítve: RP Friendly Cruise Control/Speed Limiter (https://github.com/hojgr/teb_speed_control))
 
     - Numpad '+' vagy görgő -- Sebesség növelés 10 Km/h -val
     - Numpad '-' vagy görgő -- Sebesség csökkentés 10 Km/h -val
     
-
 A szkriptbe építve megtalálható a mythic_notify így azt külön telepíteni nem kell.
-

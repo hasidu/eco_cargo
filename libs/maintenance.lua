@@ -7,6 +7,7 @@
 
 local refV1
 local showActionPoints
+local maintenenceBlips = {}
 
 RegisterNUICallback('distanceCalc', function(data, cb)
 
@@ -385,6 +386,9 @@ function showAllActionPoints()
 
     local playerCoords, point
 
+    removeBlips(maintenenceBlips)
+    maintenenceBlips = {}
+
     showActionPoints = not showActionPoints
 
     if showActionPoints then
@@ -392,6 +396,20 @@ function showAllActionPoints()
         if next(ECO.allZones) ~= nil then
 
             Citizen.CreateThread(function()
+
+                for k, v in pairs(ECO.allZones) do
+
+                        maintenenceBlips[k] = AddBlipForCoord(v['actionpoint'][1][1])
+
+                        SetBlipSprite(maintenenceBlips[k], 477) -- 477 Turck sprite
+                        SetBlipScale(maintenenceBlips[k], 1.1)
+                        SetBlipColour(maintenenceBlips[k], 46)
+                        SetBlipAsShortRange(maintenenceBlips[k], true)
+                        BeginTextCommandSetBlipName("STRING")
+                        AddTextComponentString(_("zone_blip_name"))
+                        EndTextCommandSetBlipName(maintenenceBlips[k])
+                end
+                
 
                 while showActionPoints do
 

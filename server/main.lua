@@ -419,6 +419,7 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
         local ecoCargo = ECO.CARGO[plate]
         local stolen = not (ecoCargo.owner.identifier == identifier)
 
+        TriggerClientEvent('eco_cargo:trailerSignal', -1, {}, plate, false)
 
         -- DELETE MISSION DATA
         local missionId = concatId(ecoCargo.loadingZoneId, ecoCargo.productId, '_')
@@ -612,7 +613,7 @@ AddEventHandler('eco_cargo:missionUpdate', function(data, subject)
             data.text = _('mission_is_over')
 
             TriggerClientEvent('eco_cargo:missionNotification', -1, data)
-            TriggerClientEvent('eco_cargo:trailerSignal', -1, false, false)
+            TriggerClientEvent('eco_cargo:trailerSignal', -1, {}, currentMission.plate, false)
 
             ECO.MISSION[data.missionId] = nil
         end
@@ -655,9 +656,9 @@ AddEventHandler('eco_cargo:showCountingZone', function(coord)
 end)
 
 RegisterServerEvent('eco_cargo:trailerSignal')
-AddEventHandler('eco_cargo:trailerSignal', function(coord, state)
+AddEventHandler('eco_cargo:trailerSignal', function(coord, plate, state)
 
-    TriggerClientEvent('eco_cargo:trailerSignal', -1, coord, state)
+    TriggerClientEvent('eco_cargo:trailerSignal', -1, coord, plate, state)
 end)
 
 RegisterNetEvent('eco_cargo:updateDistance')

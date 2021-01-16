@@ -9,7 +9,7 @@ Config.kashacters = false
 Config.disableMissionStartForDefenders = true
 
 -- Included teb_speed_controll: RP Friendly Cruise Control/Speed Limiter (https://github.com/hojgr/teb_speed_control)
-Config.enableSpeedControl = false
+Config.enableSpeedControl = true
 
 Config.illegalFactions = {
     'vagos',
@@ -64,7 +64,7 @@ Config.propertyParams = {
 
     -- Robbanásveszélyes
     explosive = {
-        rollMonitoringSpeed = 40,
+        rollMonitoringSpeed = 45,
         overturn = 30,
         damageRoll = 6,
         collisionSensitivity = 40,
@@ -75,7 +75,7 @@ Config.propertyParams = {
 
     -- Törékeny
     fragile = {
-        rollMonitoringSpeed = 40,
+        rollMonitoringSpeed = 45,
         overturn = 40,
         damageRoll = 6,
         collisionSensitivity = 60,
@@ -145,6 +145,10 @@ Config.propertyParams = {
     -- illegal
     illegal = {
         illegal = 1
+    },
+    -- trailer signal
+    marked_on_the_map = {
+        marked_on_the_map = 1
     },
 }
 

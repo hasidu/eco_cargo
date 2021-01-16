@@ -255,16 +255,21 @@ RegisterNUICallback('missionDelete', function(data, cb)
 end)
 
 RegisterNetEvent('eco_cargo:trailerSignal')
-AddEventHandler('eco_cargo:trailerSignal', function(coords, state)
+AddEventHandler('eco_cargo:trailerSignal', function(coords, plate, state)
 
-    if ECO.MONITOR.trailerSignal and DoesBlipExist(ECO.MONITOR.trailerSignal) then
+    if not ECO.MONITOR.trailerSignal then
 
-        RemoveBlip(ECO.MONITOR.trailerSignal)
+        ECO.MONITOR.trailerSignal = {}
+    end
+
+    if ECO.MONITOR.trailerSignal[plate] and DoesBlipExist(ECO.MONITOR.trailerSignal[plate]) then
+
+        RemoveBlip(ECO.MONITOR.trailerSignal[plate])
     end
 
     if state then
 
-        ECO.MONITOR.trailerSignal = createBlip(coords, Config.missionBlipSprite, Config.missionBlipColor, _('mission_trailer_signal'))
+        ECO.MONITOR.trailerSignal[plate] = createBlip(coords, Config.missionBlipSprite, Config.missionBlipColor, _('mission_trailer_signal'))
     end
 end)
 

@@ -245,7 +245,8 @@ end
 
 function remainingTime(lastStartTime, reproductionTime, serverTimeStamp)
 
-    if type(lastStartTime) == 'number' and lastStartTime ~= 0 then
+    if (type(lastStartTime) == 'number' and lastStartTime ~= 0) and
+            (type(reproductionTime) == 'number' and reproductionTime ~= 0) then
 
         local startTime = lastStartTime + reproductionTime * 60
 
