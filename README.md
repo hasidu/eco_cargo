@@ -3,6 +3,9 @@
 Kamionos munka - freight work for FiveM (ESX)
 https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
+Konvoj videó:
+https://youtu.be/8f7a2wVr2HU
+
 ![ecocargo gallery](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_gallery.jpg)
 [Képek](https://postimg.cc/gallery/hmm2bTb)
 
