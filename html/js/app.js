@@ -831,7 +831,7 @@ function openStatistics(data, statType) {
                 prepareStatData(cData);
 
                 tr.find(".ranking").html(i + 1);
-                tr.find(".summaryStatValueName").html(("%s %s").format(cData.firstname, cData.lastname));
+                tr.find(".summaryStatValueName").html(cData.character_name);
                 tr.find(".summaryStatValueDistance").html(cData.distance);
                 tr.find(".summaryStatValueAllStarted").html(cData.all_started);
                 tr.find(".summaryStatValueAllDone").html(cData.all_done);
