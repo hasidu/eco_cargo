@@ -9,6 +9,7 @@ https://youtu.be/8f7a2wVr2HU
 ![ecocargo gallery](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_gallery.jpg)
 [Képek](https://postimg.cc/gallery/hmm2bTb)
 
+A GITHUB ÁTNEVEZI A LETÖLTÖTT SCRIPTET ECO_CARGO-main-ra! A '-main'-t TÖRÖLD KÜLÖNBEN NEM FOG MŰKÖDNI!!!
 FONTOS: Ha több karakteres rendszert használsz:
 
 Kashakter esetén, ellenőrizd, hogy a client/main.lua fájlban az alábbi eseménykezelő tartlamazza a esx:kashloaded triggert
