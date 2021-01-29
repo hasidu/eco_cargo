@@ -118,7 +118,9 @@ function calculateParams(propertyNames)
         collisionSensitivity = 1000,
         impactFlash = 1000,
         illegal = 0,
-        marked_on_the_map = 0
+        marked_on_the_map = 0,
+        extraStatDeliveryPoint = 0,
+        extraStatQualityMultiplier = 1
     }
 
     if propertyNames and next(propertyNames) ~= nil then
@@ -138,6 +140,8 @@ function calculateParams(propertyNames)
                 setProperty(property, params, 'impactFlash', 'min')
                 setProperty(property, params, 'illegal', 'max')
                 setProperty(property, params, 'marked_on_the_map', 'max')
+                setProperty(property, params, 'extraStatDeliveryPoint', 'max')
+                setProperty(property, params, 'extraStatQualityMultiplier', 'max')
             end
         end
     end

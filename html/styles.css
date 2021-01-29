@@ -89,7 +89,8 @@ ul {
     height: 100%;
     min-height: 100%;
     margin: 0 auto;
-    background-color: #3a576a;
+    /*background-color: #3a576a;*/
+    background-color: #121212;
     overflow: auto;
 }
 
@@ -99,7 +100,7 @@ ul {
     height: 80px;
     display: block;
     justify-content: center;
-    background: #06263f url("img/eco_cargo.png") no-repeat top left;
+    background: #292929 url("img/eco_cargo.png") no-repeat top left;
     background-size: contain;
 }
 
@@ -136,11 +137,6 @@ ul {
     margin: auto;
     margin-bottom: 0;
 }
-
-/* background-color: #1d3d53;
-background: #6699ff;
-	background-image: linear-gradient(to bottom, #6699ff, #4d88ff);
-*/
 
 .btn, .btn2, .btn3 {
 
@@ -232,7 +228,7 @@ background: #6699ff;
     position: relative;
     margin: 10px 0;
     padding: 10px;
-    background-color: #e31837;
+    background-color: #292929;
     text-transform: uppercase;
     font-size: 26px;
 }
@@ -248,7 +244,7 @@ background: #6699ff;
     position: relative;
     margin: 10px 0;
     padding: 0 10px;
-    background-color: #063756;
+    background-color: #1d1d1d;
 }
 
 .itemImg {
@@ -268,19 +264,19 @@ table {
 td {
     margin: 0;
     padding: 5px 5px;
-    border-bottom: 3px solid #063756;
+    border-bottom: 3px solid #121212;
 }
 
 tr {
-    background: #3a576a;
+    background: #292929;
 }
 
 .cargoDestinationTable tr:hover {
-    background-color: #497896;
+    background-color: #121212;
 }
 
 .trSelected {
-    background-color: #497896;
+    background-color: #121212;
 }
 
 .inMission {
@@ -327,7 +323,7 @@ form {
 
 .small {
     font-size: 14px;
-    color: #c9c9c9;
+    color: #a0a0a0;
 }
 
 .big {
@@ -382,7 +378,7 @@ form {
 }
 
 .trHl {
-    background-color: #063756;
+    background-color: #3c3c3c;
     color: #5596c1;
 }
 
@@ -508,7 +504,7 @@ label {
 
 .societyPayableTr {
 
-    background: #064463;
+    background: #292929;
     display: none;
 }
 
@@ -540,10 +536,6 @@ label {
     /*background-color: #1c1c1c;*/
     background-color: rgba(28, 28, 28, 0.7);
 }
-
-/*
-#063756; #3a576a;
-     */
 
 .actionInformation {
     background: #3a576a;
@@ -836,7 +828,7 @@ label {
     display: block;
     position: relative;
     margin: 0 auto;
-    width: max-content;
+    /*width: max-content;*/
 }
 
 .statValue {
@@ -857,9 +849,9 @@ label {
     display: grid;
     grid-template-columns: 410px 410px;
     grid-gap: 5px 10px;
-    margin: 10px 0;
+    margin: 10px auto;
     border-bottom: 2px solid orange;
-    background-color: #155988;
+    background-color: #292929;
 }
 
 .stUl1 li {
@@ -873,7 +865,8 @@ label {
     grid-template-columns: 400px 400px;
     grid-gap: 5px 10px;
     padding: 10px;
-    background-color: #155988;
+    background-color: #292929;
+    margin: 0 auto;
 }
 
 .stUl2 li {
@@ -910,42 +903,235 @@ label {
     line-height: 110px;
 }
 
+.statRank {
+    display: block;
+    width: 166px;
+    height: 31px;
+    background-repeat: no-repeat;
+    padding: 5px 0;
+    background-origin: content-box;
+}
+
+.statTitle {
+    display: block;
+}
 
 .summaryStatHeadName, .summaryStatValueName {
     text-align: left !important;
 }
 
 .currentOrder {
-    background-color: #155988 !important;
+    background-color: #242424 !important;
+}
+
+
+.summaryStatisticsItemContainer {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+}
+
+.summaryStatisticsItem {
+    
+    border-width: 1px;
+    border-style: solid;
+    position: relative;
+    font-size: 16px;
+    color: whitesmoke;
+    margin: 5px 10px;
+}
+
+.statisticsItemMain {
+    padding: 5px;
+}
+
+.statisticsItemMainRight {
+    float: right;
+    width: 40%;
+}
+
+.summaryStatValueDistance,
+.summaryStatValueWorkingTime,
+.summaryStatValueAllStarted {
+    width: 100px;
+    text-align: right;
+}
+
+.statisticsItemDropDown {
+    height: 0;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.statisticsItemDropDownContent {
+    padding: 5px;
+}
+
+.space-evenly {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px 0;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    margin: 1px 0;
+}
+
+.summaryStatValueName {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 300px;
+}
+
+.summaryStatValueTitleLabel {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 180px;
+}
+
+.summaryStatValueRankLabel {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.summaryStatValueDistance {
+    display: inline-block;
+}
+
+.summaryStatValueWorkingTime {
+    display: inline-block;
+}
+
+.summaryStatValueAllStarted {
+    display: inline-block;
+}
+
+.summaryStatValueFailed {
+    text-align: center;
+    color: red;
+}
+
+
+.summaryStatValueDates {
+
+}
+
+.rankList {
+    margin: 10px;
+}
+
+.statisticsTitles {
+    width: 410px;
+    float: left;
+}
+
+.statisticsRanks {
+    width: 550px;
+}
+
+.orderByForm {
+    display: block;
+    position: absolute;
+    top: -38px;
+    right: 10px;
+}
+
+.itemStyle1 {
+    border-color: #747478;
+    background: url("img/statitem_bg1.jpg");
+}
+
+.labelStyle1 {
+    color: #747478;
+}
+
+.itemStyle2 {
+    border-color: #8f6f64;
+    background: url("img/statitem_bg2.jpg");
+}
+
+.labelStyle2 {
+    color: #8f6f64;
+}
+
+
+.itemStyle3 {
+    border-color: #9f9fa7;
+    background: url("img/statitem_bg3.jpg");
+}
+
+.labelStyle3 {
+    color: #9f9fa7;
+}
+
+
+.itemStyle4 {
+    border-color: #cbba6e;
+    background: url("img/statitem_bg4.jpg");
+}
+
+.labelStyle4 {
+    color: #cbba6e;
+}
+
+
+.itemStyle5 {
+    border-color: #56d3ff;
+    background: url("img/statitem_bg5.jpg");
+}
+
+.labelStyle5 {
+    color: #56d3ff;
+}
+
+.dropdown {
+    display: block;
 }
 
 .tblTheme3 {
 
-    color: #fdf9ec;
+    color: #edc054;
 }
 
+.tblTheme3 td:first-child,
+.tblTheme3 th:first-child{
+    text-align: left;
+    color: whitesmoke;
+}
 .tblTheme3 td {
 
     margin: 0;
     padding: 15px;
     text-align: right;
     border: none;
+    vertical-align: top;
 }
 
 .tblTheme3 th {
 
     margin: 0;
     padding: 5px 15px;
-    background: #152e59;
+    background: #3c3c3c;
     text-align: right;
 }
 
 .tblTheme3 tr {
-    background: #155988;
+    background: #242424;
 }
 
 .tblTheme3 tr:nth-child(2n) {
-    background: #156494;
+    background: #161616;
 }
 
 /* DIAGNOSTICS */

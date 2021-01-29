@@ -405,41 +405,59 @@
     <ul class="statisticsMenu">
         <li id="myStatisticsBtn" class="btn">Saját statisztika</li>
         <li id="summaryStatisticsBtn" class="btn">Összesített lista</li>
+        <li id="ranksBtn" class="btn">Rangok</li>
     </ul>
-
 
     <div class="statisticsContent"></div>
 </div>
 
 <div class="summaryStatistics template">
-    <table class="summaryStatisticsTable tblTheme3">
-        <tr>
-            <th class="summaryStatHeadRanking">H.</th>
-            <th class="summaryStatHeadName" data-orderby="firstname">Név</th>
-            <th class="summaryStatHeadDistance" data-orderby="distance">Km</th>
-            <th class="summaryStatHeadWorkingTime" data-orderby="working_time">Munkaidő</th>
-            <th class="summaryStatHeadAllStarted" data-orderby="all_started">Fuvarok</th>
-            <th class="summaryStatHeadAllDone" data-orderby="all_done">Teljesített</th>
-            <th class="summaryStatHeadVulnerable" data-orderby="vulnerable">Sérülékeny</th>
-            <th class="summaryStatHeadQualityRate" data-orderby="quality_rate">Elégedettség</th>
-            <th class="summaryStatHeadSuccessRate" data-orderby="success_rate">Siker</th>
-            <th class="summaryStatHeadRegistered" data-orderby="registered">Első fuvar</th>
-            <th class="summaryStatHeadLastActivity" data-orderby="last_activity">Utolsó</th>
-        </tr>
-        <tr class="summaryStatisticsTableTr template">
-            <td class="ranking"></td>
-            <td class="summaryStatValueName"></td>
-            <td class="summaryStatValueDistance"></td>
-            <td class="summaryStatValueWorkingTime"></td>
-            <td class="summaryStatValueAllStarted"></td>
-            <td class="summaryStatValueAllDone"></td>
-            <td class="summaryStatValueVulnerable"></td>
-            <td class="summaryStatValueQualityRate"></td>
-            <td class="summaryStatValueSuccessRate"></td>
-            <td class="summaryStatValueRegistered"></td>
-            <td class="summaryStatValueLastActivity"></td>
-        </tr>
-    </table>
+    <div class="summaryStatisticsItemContainer">
+
+        <!-- ORDER BY MENU -->
+        <form class="orderByForm" name="orderByForm">
+
+            <select class="statisticsOrderByMenu" onChange="orderBy(this)"; disabled>
+                <option value="firstname">Név</option>
+                <option value="distance">Megtett távolság</option>
+                <option value="working_time">Munkaidő</option>
+                <option value="all_started">Elvállalt fuvarjaid</option>
+                <option value="all_done">Teljesített fuvarjaid</option>
+                <option value="vulnerable">Sérülékeny fuvarok</option>
+                <option value="quality_rate">Elégedettségi mutató</option>
+                <option value="success_rate">Siker mutató</option>
+            </select>
+        </form>
+
+        <div class="summaryStatisticsItem template">
+
+            <div class="statisticsItemMain">
+
+                <div class="summaryStatValueName"></div>
+                <div class="summaryStatValueTitleLabel"></div>
+                <div class="summaryStatValueRankLabel"></div>
+
+                <div class="statisticsItemMainRight space-between">
+
+                    <div class="summaryStatValueDistance"></div>
+                    <div class="summaryStatValueWorkingTime"></div>
+                    <div class="summaryStatValueAllStarted"></div>
+                </div>
+            </div>
+
+            <div class="statisticsItemDropDown">
+
+                <div class="statisticsItemDropDownContent space-between">
+
+                    <div class="summaryStatValueFailed"></div>
+                    <div class="summaryStatValueVulnerable"></div>
+                    <div class="summaryStatValueSuccessRate"></div>
+                    <div class="summaryStatValueQualityRate"></div>
+                    <div class="summaryStatValueDates"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="myStatistics template">
@@ -535,6 +553,12 @@
         </li>
     </ul>
 
+</div>
+
+<div class="rankList template">
+
+    <h3 style="text-align: center">Az alábbi táblázatok tartalmazzák azokat az értékhatárokat, amiket adott ranghoz / címhez teljesíteni szükséges.</h3>
+    <div class="tableContainer space-evenly"></div>
 </div>
 
 <!-- HUD -->

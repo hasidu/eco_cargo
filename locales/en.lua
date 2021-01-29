@@ -68,18 +68,26 @@ Locales['en'] = {
     ['heavy'] = 'Heavy',
     ['illegal'] = 'Illegal',
     ['marked_on_the_map'] = 'Marked goods',
+    ['high_sensitivity'] = 'High sensitivity',
 
     -- RANKS
-    ['rank1'] = 'Newbie',
-    ['rank2'] = 'Enthusiast',
-    ['rank3'] = 'Skilled Worker',
-    ['rank4'] = 'Professional',
-    ['rank5'] = 'Master',
-    ['rank6'] = 'Instructor',
-    ['rank7'] = 'Elite',
-    ['rank8'] = 'King of the Road',
-    ['rank9'] = 'Legend',
-    ['rank10'] = 'Divine Champion',
+    ['rank1'] = 'iron',
+    ['rank2'] = 'bronze',
+    ['rank3'] = 'silver',
+    ['rank4'] = 'gold',
+    ['rank5'] = 'platinum', -- diamond
+    
+    -- RANKS
+    ['title1'] = 'Newbie',
+    ['title2'] = 'Enthusiast',
+    ['title3'] = 'Skilled Worker',
+    ['title4'] = 'Professional',
+    ['title5'] = 'Master',
+    ['title6'] = 'Instructor',
+    ['title7'] = 'Elite',
+    ['title8'] = 'King of the Road',
+    ['title9'] = 'Legend',
+    ['title10'] = 'Divine Champion',
 
     -- PRODUCTS
     ['oil'] = 'Oil',
@@ -176,5 +184,6 @@ Locales['en'] = {
     ['rock'] = 'Rocks',
     ['disassembled_part'] = 'Disassembled parts',
     ['military_communication_device'] = 'Military communication device',
-    ['life_support_equipment'] = 'Life support devices'
+    ['life_support_equipment'] = 'Life support devices',
+    ['hazardous_material'] = 'Hazardous material'
 }

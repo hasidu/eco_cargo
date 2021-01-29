@@ -4,41 +4,10 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 ECO = {
     CARGO = {},
     PLAYERS = {},
-    MISSION = {--[[['31_56'] = {
-            owner = {
-                group = 'superadmin',
-                isApprovedDriver = true,
-                identifier = 'steam:110000103164c14',
-                job = {
-                    skin_female = {},
-                    label = 'LSPD',
-                    skin_male = {},
-                    grade_label = 'Officer',
-                    name = 'police',
-                    grade_salary = 40,
-                    grade = 1,
-                    grade_name = 'officer',
-                },
-                dateOfBirth = '1976-11-03',
-                serverId = 1,
-                coords = vector3(3624.053, 3764.666, 29.01301),
-                characterName = 'Roy Beállitott Tucker',
-                permissionLevel = 0,
-                cargoRequestTime = 0,
-            },
-            trailerPlate = '45CXC200',
-            defender = 'police',
-            destinationZoneId = 66,
-            joined = {
-                'steam:110000103164c15', 'steam:110000103164c16', 'steam:110000103164c17', 'steam:110000103164c18'
-            }
-        }]]
-    },
+    MISSION = {},
     PRODUCTS = {},
     loadingZonesIds = {}
 }
-
-
 
 ESX.RegisterServerCallback('eco_cargo:getMission', function(source, cb)
 
@@ -415,6 +384,8 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
     if ECO.CARGO[plate] then
 
         local isMission
+        local increaseDoneDelivery, increaseDoneMission = 1, 1
+        local quality = 0
         local defenders = {}
         local ecoCargo = ECO.CARGO[plate]
         local stolen = not (ecoCargo.owner.identifier == identifier)
@@ -429,6 +400,25 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
             isMission = true
             defenders = ECO.MISSION[missionId].joined
             TriggerEvent('eco_cargo:missionUpdate', { missionId = missionId }, 'delete')
+        end
+
+
+        local params = ecoCargo.params
+
+        if params.extraStatDeliveryPoint and type(params.extraStatDeliveryPoint) == 'number' then
+
+            increaseDoneDelivery = increaseDoneDelivery + params.extraStatDeliveryPoint
+        end
+
+        if params.extraStatQualityMultiplier and type(params.extraStatQualityMultiplier) == 'number' then
+
+            quality = ecoCargo.quality * params.extraStatQualityMultiplier
+        end
+
+        if isMission then
+
+            quality = ecoCargo.quality * 2
+            increaseDoneMission = 2
         end
 
         local sql = [[
@@ -458,9 +448,11 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
                 )
                 ON DUPLICATE KEY UPDATE
                 `distance` = `distance` + @distance,
-                `goods_quality` = `goods_quality` + @goods_quality,
-                `done_delivery` = `done_delivery` + @done_delivery,
-                `done_mission` = `done_mission` + @done_mission,
+                `goods_quality` = IF(`goods_quality` + @goods_quality > (`done_delivery` + @done_delivery + `done_mission` + @done_mission) * 1000,
+                (`done_delivery` + @done_delivery + `done_mission` + @done_mission) * 1000,
+                `goods_quality` + @goods_quality),
+                `done_delivery` = IF(`started_delivery` >= `done_delivery` + @done_delivery, `done_delivery` + @done_delivery, `started_delivery`),
+                `done_mission` = IF(`started_mission` >= `done_mission` + @done_mission, `done_mission` + @done_mission, `started_mission`),
                 `stolen_delivery` = `stolen_delivery` + @stolen_delivery,
                 `stolen_mission` = `stolen_mission` + @stolen_mission,
                 `destroyed_trailer` = `destroyed_trailer` + @destroyed_trailer,
@@ -468,14 +460,13 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
                 `last_activity` = current_timestamp()
             ]]
 
-
         MySQL.Async.execute(sql,
             {
                 ['@identifier'] = identifier,
                 ['@distance'] = (not stolen and state ~= 'DESTROYED') and ecoCargo.km or 0,
-                ['@goods_quality'] = (not stolen and state ~= 'DESTROYED') and ecoCargo.quality or 0,
-                ['@done_delivery'] = (not isMission and not stolen and state ~= 'DESTROYED') and 1 or 0,
-                ['@done_mission'] = (isMission and not stolen and state ~= 'DESTROYED') and 1 or 0,
+                ['@goods_quality'] = (not stolen and state ~= 'DESTROYED') and quality or 0,
+                ['@done_delivery'] = (not isMission and not stolen and state ~= 'DESTROYED') and increaseDoneDelivery or 0, -- if set extraStatDeliveryPoint then improves bad statistics
+                ['@done_mission'] = (isMission and not stolen and state ~= 'DESTROYED') and increaseDoneMission or 0, -- DEFAULT: 1 (if 2 then improves bad statistics)
                 ['@stolen_delivery'] = (not isMission and stolen and state ~= 'DESTROYED') and 1 or 0,
                 ['@stolen_mission'] = (isMission and stolen and state ~= 'DESTROYED') and 1 or 0,
                 ['@destroyed_trailer'] = state == 'DESTROYED' and 1 or 0,

@@ -68,18 +68,26 @@ Locales['hu'] = {
     ['heavy'] = 'Nehéz',
     ['illegal'] = 'Körözés alatt',
     ['marked_on_the_map'] = 'Jelölt árú',
+    ['high_sensitivity'] = 'Magas érzékenység',
 
     -- RANKS
-    ['rank1'] = 'Kezdő',
-    ['rank2'] = 'Lelkes',
-    ['rank3'] = 'Szakképzett',
-    ['rank4'] = 'Profi',
-    ['rank5'] = 'Mester',
-    ['rank6'] = 'Oktató',
-    ['rank7'] = 'Elit',
-    ['rank8'] = 'Az út királya',
-    ['rank9'] = 'Legenda',
-    ['rank10'] = 'Isteni bajnok',
+    ['rank1'] = 'vas',
+    ['rank2'] = 'bronz',
+    ['rank3'] = 'ezüst',
+    ['rank4'] = 'arany',
+    ['rank5'] = 'platinum', -- diamond
+
+    -- TITLES
+    ['title1'] = 'Kezdő',
+    ['title2'] = 'Lelkes',
+    ['title3'] = 'Szakképzett',
+    ['title4'] = 'Profi',
+    ['title5'] = 'Mester',
+    ['title6'] = 'Oktató',
+    ['title7'] = 'Elit',
+    ['title8'] = 'Utak királya',
+    ['title9'] = 'Legenda',
+    ['title10'] = 'Isteni bajnok', -- mythic mitikus, ethernal örök
 
     -- PRODUCTS
     ['oil'] = 'Nyers olaj',
@@ -176,5 +184,7 @@ Locales['hu'] = {
     ['rock'] = 'Kőzet',
     ['disassembled_part'] = 'Bontott alaktrészek',
     ['military_communication_device'] = 'Katonai kommunikációs eszköz',
-    ['life_support_equipment'] = 'Életfenntartó berendezés'
+    ['life_support_equipment'] = 'Életfenntartó berendezés',
+    ['hazardous_material'] = 'Veszélyes anyag',
+
 }

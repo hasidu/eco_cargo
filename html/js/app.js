@@ -198,8 +198,6 @@ function openCargoSelect(shipments, currentZone, player, mission) {
                     tr.find(".cautionMoney").html(MONEY.format(cargo.caution_money));
                     tr.find(".cargoDistance").html(("%s Km").format(dZone.distance));
                     tr.find(".freightFee").html(MONEY.format(dZone.priceData.freightFee));
-                    //tr.find(".freightFee").html("$" + dZone.priceData.freightFee + " $" + dZone.priceData.illegalPrice);
-
 
                     tr.appendTo(cargoItem.find(".cargoDestinationTable"));
 
@@ -267,7 +265,6 @@ function openCargoSelect(shipments, currentZone, player, mission) {
 
                             if (typeof response.message === 'string' && response.message !== '') {
 
-                                //Üzenet megjelenítése
                                 ShowNotification({
                                     type: response.type,
                                     text: response.message,
@@ -276,7 +273,6 @@ function openCargoSelect(shipments, currentZone, player, mission) {
 
                             if (response.state) {
 
-                                //fuvar inditása
                                 closePage();
                                 $.post('https://eco_cargo/registerCargo', JSON.stringify(cargoData));
                             }
@@ -313,7 +309,6 @@ function openCargoSelect(shipments, currentZone, player, mission) {
 
                         if (typeof response.message === 'string' && response.message !== '') {
 
-                            //Üzenet megjelenítése
                             ShowNotification({
                                 type: response.type,
                                 text: response.message,
@@ -333,8 +328,6 @@ function openCargoSelect(shipments, currentZone, player, mission) {
                             missionInfo.isOwned = true;
 
                             cargoItem.find('tr').click();
-
-                            //TODO HA MISSIONBA kerülsz a többi product mission gombját tiltani kell
                         }
                     }
                 );
@@ -360,8 +353,6 @@ function openMissionList(missionList, player) {
 
         let isDefender = playerIsDefender(missionList, player);
 
-
-        //pageWrapper.find(".headInformation").html(player.characterName);
         pageWrapper.find(".title").html("Küldetés lista");
         pageWrapper.find(".description").html("Csatlakozhatsz védőnek, jelölheted a rakodási hely és a célállomás pontokat.");
 
@@ -765,8 +756,9 @@ function openStatistics(data, statType) {
 
     let myStatisticsBtn = statisticsContainer.find("#myStatisticsBtn");
     let summaryStatisticsBtn = statisticsContainer.find("#summaryStatisticsBtn");
+    let ranksBtn = statisticsContainer.find("#ranksBtn");
 
-    if (statType === 'allStatistics') {
+    if (statType !== 'myStatistics') {
 
         myStatisticsBtn.click(function () {
 
@@ -782,7 +774,9 @@ function openStatistics(data, statType) {
             return false;
         });
 
-    } else {
+    }
+
+    if (statType !== 'allStatistics') {
 
         summaryStatisticsBtn.click(function () {
 
@@ -809,6 +803,29 @@ function openStatistics(data, statType) {
 
     }
 
+    if (statType !== 'ranks') {
+
+        ranksBtn.click(function () {
+
+            if (lastEventTime + floodProtectionTime < getTimeStamp()) {
+
+                lastEventTime = getTimeStamp();
+
+                $.post('https://eco_cargo/getRanks', JSON.stringify({})).then(
+                    resp => {
+
+                        openStatistics(jsonParse(resp), 'ranks')
+                    }
+                );
+            } else {
+
+                ShowNotification({type: 'warning', text: floodMessage});
+            }
+
+            return false;
+        });
+    }
+
 
     if (statType === 'allStatistics') {
 
@@ -817,78 +834,70 @@ function openStatistics(data, statType) {
             let summaryStatistics = $(".summaryStatistics").clone();
             summaryStatistics.removeClass("template");
 
-            let table = summaryStatistics.find(".summaryStatisticsTable");
-            let trTemp = table.find(".summaryStatisticsTableTr");
-            table.removeClass("template");
+            let statisticsItemContainer = summaryStatistics.find(".summaryStatisticsItemContainer");
+            let itemTmp = statisticsItemContainer.find(".summaryStatisticsItem");
+            statisticsItemContainer.removeClass("template");
+
+            statisticsItemContainer.find("option:selected").removeAttr("selected");
+            statisticsItemContainer.find("option[value='" + missionOrderBy + "']").attr('selected', 'selected');
+
 
             for (let i = 0; i < data.length; i++) {
 
                 let cData = data[i];
 
-                let tr = trTemp.clone();
-                tr.removeClass("template");
+                let item = itemTmp.clone();
+                item.removeClass("template");
 
                 prepareStatData(cData);
 
-                tr.find(".ranking").html(i + 1);
-                tr.find(".summaryStatValueName").html(cData.character_name);
-                tr.find(".summaryStatValueDistance").html(cData.distance);
-                tr.find(".summaryStatValueAllStarted").html(cData.all_started);
-                tr.find(".summaryStatValueAllDone").html(cData.all_done);
-                tr.find(".summaryStatValueVulnerable").html(cData.vulnerable);
-                tr.find(".summaryStatValueWorkingTime").html(("%s %s").format(cData.working_time, cData.working_time_unit));
-                tr.find(".summaryStatValueQualityRate").html(("%s%").format(cData.quality_rate));
-                tr.find(".summaryStatValueSuccessRate").html(("%s%").format(cData.success_rate));
-                tr.find(".summaryStatValueRegistered").html(cData.registered);
-                tr.find(".summaryStatValueLastActivity").html(cData.last_activity);
+                let failedCargo = cData.all_started - cData.all_done;
 
-                tr.appendTo(table);
+                item.addClass('itemStyle' + cData.rank);
+                item.find(".summaryStatValueName").html(("%s. %s").format(i + 1, cData.character_name));
+                item.find(".summaryStatValueTitleLabel").html(cData.titleLabel).addClass('labelStyle' + cData.rank);
+                item.find(".summaryStatValueRankLabel").html(cData.rankLabel).addClass('labelStyle' + cData.rank);
+                item.find(".summaryStatValueDistance").html(("%s %s").format(cData.distance, 'km'));
+                item.find(".summaryStatValueAllStarted").html(("%s %s").format(cData.all_started, 'fuvar'));
+
+                if (failedCargo > 0) {
+                    item.find(".summaryStatValueFailed").html(("%s %s").format(failedCargo, 'sikertelen'));
+                } else {
+                    item.find(".summaryStatValueFailed").remove();
+                }
+
+                item.find(".summaryStatValueVulnerable").html(("%s %s").format(cData.vulnerable, 'sérülékeny'));
+                item.find(".summaryStatValueWorkingTime").html(("%s %s").format(cData.working_time, cData.working_time_unit));
+                item.find(".summaryStatValueQualityRate").html(("%s% %s").format(cData.quality_rate, 'elégedettség'));
+                item.find(".summaryStatValueSuccessRate").html(("%s% %s").format(cData.success_rate, 'sikeresség'));
+                item.find(".summaryStatValueDates").html(("%s - %s").format(cData.registered, cData.last_activity));
+
+                item.click(function () {
+
+                    let statisticsItemDropDown = $(this).find(".statisticsItemDropDown");
+
+                    if (statisticsItemDropDown.outerHeight(true) > 0) {
+
+                        statisticsItemDropDown.css('height', 0)
+                    } else {
+
+                        statisticsItemDropDown.css('height', $(this).find(".statisticsItemDropDownContent").outerHeight())
+                    }
+                });
+
+
+                item.appendTo(statisticsItemContainer);
             }
 
             summaryStatistics.appendTo(statisticsContent);
 
-            let th = table.find("th");
+            setInterval(function () {
+                statisticsItemContainer.find(".statisticsOrderByMenu").prop("disabled", false);
+            }, floodProtectionTime * 1000);
 
-            th.click(function () {
-
-                if ($(this).data('orderby') !== undefined) {
-
-                    if (lastEventTime + floodProtectionTime < getTimeStamp()) {
-
-                        lastEventTime = getTimeStamp();
-
-                        missionOrderBy = $(this).data('orderby');
-
-                        $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
-
-                            orderBy: missionOrderBy
-                        })).then(
-                            resp => {
-
-                                openStatistics(jsonParse(resp), 'allStatistics')
-                            }
-                        );
-
-                    } else {
-
-                        ShowNotification({type: 'warning', text: floodMessage});
-                    }
-                }
-
-
-                return false;
-            });
-
-            for (let i = 0; i < th.length; i++) {
-
-                if (th[i].dataset.orderby === missionOrderBy) {
-
-                    th[i].classList.add('currentOrder');
-                }
-            }
         }
 
-    } else {
+    } else if (statType === 'myStatistics') {
 
         if (!$.isEmptyObject(data)) {
 
@@ -929,6 +938,71 @@ function openStatistics(data, statType) {
 
         }
 
+    } else if (statType === 'ranks') {
+
+        let rankList = $(".rankList").clone();
+        rankList.removeClass("template");
+
+        let tableContainer = rankList.find('.tableContainer');
+
+        let titles = data.titles;
+        let ranks = data.ranks;
+        let rankLabels = data.rankLabels;
+        let titleLabels = data.titleLabels;
+
+        // TITLE TABLE
+        let titleTable = $('<table/>');
+
+        titleTable.append('<tr>' +
+            '<th>Cím</th>' +
+            '<th>Kilométer</th>' +
+            '<th>Rang</th>' +
+            '</tr>');
+
+        titleTable.addClass("statisticsTitles tblTheme3");
+
+        for (let i = 0; i < titles.length; i++) {
+
+            let rankIndex = titles[i].rank - 1;
+
+            titleTable.append('<tr>' +
+                '<td>' + titleLabels[i] + '</td>' +
+                '<td>' + titles[i].distance + '</td>' +
+                '<td>' + data.rankLabels[rankIndex] + '</td>' +
+                '</tr>');
+        }
+
+        tableContainer.append(titleTable);
+
+
+        // RANK TABLE
+        let rankTable = $('<table/>');
+
+        rankTable.append('<tr>' +
+            '<th>Rang</th>' +
+            '<th>Sérülékeny</th>' +
+            '<th>Fuvarok</th>' +
+            '<th>Elégedettség</th>' +
+            '<th>Sikeresség</th>' +
+            '</tr>');
+
+        rankTable.addClass("statisticsRanks tblTheme3");
+
+        for (let i = 0; i < ranks.length; i++) {
+
+            let rank = ranks[i];
+
+            rankTable.append('<tr>' +
+                '<td>' + rankLabels[i] + '</td>' +
+                '<td>' + rank.vulnerable + '</td>' +
+                '<td>' + rank.all_done + '</td>' +
+                '<td>' + rank.quality_rate + '%</td>' +
+                '<td>' + rank.success_rate + '%</td>' +
+                '</tr>');
+        }
+
+        tableContainer.append(rankTable);
+        rankList.appendTo(statisticsContent);
     }
 
     statisticsContainer.appendTo(page);
@@ -1043,3 +1117,27 @@ $(document).keyup(function (key) {
     }
 });
 
+function orderBy(selectMenu) {
+
+    if (lastEventTime + floodProtectionTime < getTimeStamp()) {
+
+        lastEventTime = getTimeStamp();
+
+        missionOrderBy = selectMenu.value;
+
+        $.post('https://eco_cargo/getAllStatistics', JSON.stringify({
+
+            orderBy: missionOrderBy
+        })).then(
+            resp => {
+
+                openStatistics(jsonParse(resp), 'allStatistics')
+            }
+        );
+
+    } else {
+
+        ShowNotification({type: 'warning', text: floodMessage});
+        return false;
+    }
+}

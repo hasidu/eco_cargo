@@ -273,6 +273,7 @@ function displayTime(elapsedTime)
     return hours + minutes, 'hour'
 end
 
+
 function getZoneProductsIds(zoneId)
 
     local productIds = {}

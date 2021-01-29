@@ -9,7 +9,7 @@ Config.kashacters = false
 Config.disableMissionStartForDefenders = true
 
 -- Included teb_speed_controll: RP Friendly Cruise Control/Speed Limiter (https://github.com/hojgr/teb_speed_control)
-Config.enableSpeedControl = true
+Config.enableSpeedControl = false
 
 Config.illegalFactions = {
     'vagos',
@@ -150,6 +150,40 @@ Config.propertyParams = {
     marked_on_the_map = {
         marked_on_the_map = 1
     },
+
+    -- possible improving statistics
+    high_sensitivity = {
+        rollMonitoringSpeed = 35,
+        overturn = 40,
+        damageRoll = 4,
+        collisionSensitivity = 40,
+        extraStatDeliveryPoint = 1, -- incrase mission and normal delivery (improving statistics)
+        extraStatQualityMultiplier = 2, -- cargo quality Multiplier (improving statistics)
+        impactFlash = 40 --km/h
+    },
+}
+
+-- RANK CONDITIONS
+Config.rank = {
+    { vulnerable = 0, all_done = 0, quality_rate = 0, success_rate = 0 },       -- iron
+    { vulnerable = 5, all_done = 50, quality_rate = 90, success_rate = 90 },    -- bronze
+    { vulnerable = 30, all_done = 150, quality_rate = 95, success_rate = 95 },  -- silver
+    { vulnerable = 90, all_done = 400, quality_rate = 97, success_rate = 97 },  -- gold
+    { vulnerable = 150, all_done = 800, quality_rate = 99, success_rate = 99 }, -- platinum
+}
+
+-- TITLE CONDITIONS
+Config.title = {
+    { distance = 0, rank = 1 },     -- Newbie,
+    { distance = 300, rank = 2 },   -- Enthusiast,
+    { distance = 1000, rank = 3 },  -- Skilled Worker,
+    { distance = 2500, rank = 3 },  -- Professional,
+    { distance = 4000, rank = 3 },  -- Master,
+    { distance = 5500, rank = 3 },  -- Instructor,
+    { distance = 7500, rank = 4 },  -- Elite,
+    { distance = 10000, rank = 4 }, -- King of the Road,
+    { distance = 12000, rank = 4 }, -- Legend,
+    { distance = 14500, rank = 5 }, -- Divine Champion,
 }
 
 -- ILLEGAL TARGETS
