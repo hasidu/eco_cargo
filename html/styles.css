@@ -1047,6 +1047,13 @@ label {
     right: 10px;
 }
 
+.statisticsOrderByMenu {
+    padding: 3px;
+    background: #edc054;
+    border: none;
+    outline-style: none;
+}
+
 .itemStyle1 {
     border-color: #747478;
     background: url("img/statitem_bg1.jpg");
