@@ -448,11 +448,10 @@ AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
                 )
                 ON DUPLICATE KEY UPDATE
                 `distance` = `distance` + @distance,
-                `goods_quality` = IF(`goods_quality` + @goods_quality > (`done_delivery` + @done_delivery + `done_mission` + @done_mission) * 1000,
-                (`done_delivery` + @done_delivery + `done_mission` + @done_mission) * 1000,
-                `goods_quality` + @goods_quality),
                 `done_delivery` = IF(`started_delivery` >= `done_delivery` + @done_delivery, `done_delivery` + @done_delivery, `started_delivery`),
                 `done_mission` = IF(`started_mission` >= `done_mission` + @done_mission, `done_mission` + @done_mission, `started_mission`),
+                `goods_quality` = IF(`goods_quality` + @goods_quality > (`done_delivery` + `done_mission`) * 100,
+                (`done_delivery` + `done_mission`) * 100, `goods_quality` + @goods_quality),
                 `stolen_delivery` = `stolen_delivery` + @stolen_delivery,
                 `stolen_mission` = `stolen_mission` + @stolen_mission,
                 `destroyed_trailer` = `destroyed_trailer` + @destroyed_trailer,
