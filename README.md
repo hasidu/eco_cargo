@@ -1,5 +1,4 @@
 # ECO CARGO 
-Érdemes visszanézni, mert az első verzó óta javítások, bővítések történtek, melyek a továbbiakban is várhatók...
 - 01.31: server/main.lua stat update bugfix
 - 01.29: Rang rendszer bevezetve, statisztikát lehet javítani a különlegesen sérülékeny fuvar szállításával, pótkocsik cserélve, nehezen hozzáférhető pótkocsik áthelyezve. NUI felület átszinezve, statisztika átalakítva 
 
