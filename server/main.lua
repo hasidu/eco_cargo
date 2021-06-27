@@ -22,6 +22,7 @@ ESX.RegisterServerCallback('eco_cargo:getPlayers', function(source, cb)
         local xPlayer
         local getPlayers = ESX.GetPlayers()
 
+
         for i = 1, #getPlayers do
 
             xPlayer = ESX.GetPlayerFromId(getPlayers[i])
@@ -57,7 +58,7 @@ ESX.RegisterServerCallback('eco_cargo:getPlayer', function(source, cb)
         userData.job = xPlayer.job
         userData.identifier = xPlayer.identifier
 
-        MySQL.Async.fetchAll('SELECT * FROM users WHERE identifier = @identifier', { ['@identifier'] = xPlayer.identifier }, function(user)
+        MySQL.Async.fetchAll('SELECT * FROM users WHERE identifier = @identifier', { ['@identifier'] = userData.identifier }, function(user)
 
             if user[1] then
 
@@ -146,7 +147,9 @@ end)
 ESX.RegisterServerCallback('eco_cargo:cargoLoader', function(source, cb, plate, existsCheck)
 
     -- local _source = source
-    -- local identifier = GetPlayerIdentifier(_source, 0)
+    -- local xPlayer = ESX.GetPlayerFromId(_source)
+    --
+    -- local identifier = xPlayer.identifier
 
     if existsCheck then
 
@@ -211,7 +214,9 @@ end)
 ESX.RegisterServerCallback('eco_cargo:getStatistics', function(source, cb)
 
     local _source = source
-    local identifier = GetPlayerIdentifier(_source, 0)
+    local xPlayer = ESX.GetPlayerFromId(_source)
+
+    local identifier = xPlayer.identifier
 
     -- STAT RECORD
     local sql = [[
@@ -379,7 +384,9 @@ RegisterNetEvent('eco_cargo:deleteCargo')
 AddEventHandler('eco_cargo:deleteCargo', function(plate, state)
 
     local _source = source
-    local identifier = GetPlayerIdentifier(_source, 0)
+    local xPlayer = ESX.GetPlayerFromId(_source)
+
+    local identifier = xPlayer.identifier
 
     if ECO.CARGO[plate] then
 
@@ -697,6 +704,7 @@ function removeMoney(_source, amount)
 end
 
 
+--[[
 TriggerEvent('es:addGroupCommand', 'cargodiag', 'admin', function(source, args, user)
 
     TriggerClientEvent('eco_cargo:cargoDiagnostics', source)
@@ -705,3 +713,26 @@ end, function(source, args, user)
 
     TriggerClientEvent('chat:addMessage', source, { args = { "^1SYSTEM", "Ehhez nincs jogosultságod!" } })
 end, { help = "ECO CARGO diagnosztika" })
+]]
+
+
+-- if not essentialmode:
+RegisterCommand("cargodiag", function(source)
+
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if xPlayer then
+
+        local group = xPlayer.getGroup()
+
+        if group == 'admin' or group == 'superadmin' then
+
+            TriggerClientEvent('eco_cargo:cargoDiagnostics', source)
+            TriggerClientEvent('esx:showNotification', source, '~r~ECO CARGO:~s~ Diagnosztika')
+
+        else
+
+            TriggerClientEvent('chat:addMessage', source, { args = { "^1SYSTEM", "Ehhez nincs jogosultságod!" } })
+        end
+    end
+end)
