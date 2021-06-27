@@ -1,5 +1,5 @@
 # ECO CARGO 
-- 2021. 06. 27. server/main.lua kezeli a license id-t is + cargodiag parancs átírva, hogy essentialmode nélkül is működjön(es:addGroupCommand helyett RegisterCommand)
+- 2021.06.27. server/main.lua kezeli a license id-t is + cargodiag parancs átírva, hogy essentialmode nélkül is működjön(es:addGroupCommand helyett RegisterCommand)
 
 - 01.31: server/main.lua stat update bugfix
 - 01.29: Rang rendszer bevezetve, statisztikát lehet javítani a különlegesen sérülékeny fuvar szállításával, pótkocsik cserélve, nehezen hozzáférhető pótkocsik áthelyezve. NUI felület átszinezve, statisztika átalakítva 
