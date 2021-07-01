@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 
-author 'Ekhion'
+author 'Tutya & Ekhion'
 description 'Economy - Cargo'
 version '1.0'
 
