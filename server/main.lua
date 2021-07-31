@@ -195,7 +195,6 @@ ESX.RegisterServerCallback('eco_cargo:getAllStatistics', function(source, cb, da
         `eco_cargo_stats`.`stolen_mission` + `eco_cargo_stats`.`stolen_delivery` as `all_stolen`,
         `eco_cargo_stats`.`goods_quality` / (`eco_cargo_stats`.`started_mission` + `eco_cargo_stats`.`started_delivery`) as `quality_rate`,
         (`eco_cargo_stats`.`done_mission` + `eco_cargo_stats`.`done_delivery`) / (`eco_cargo_stats`.`started_mission` + `eco_cargo_stats`.`started_delivery`) * 100 as `success_rate`,
-        `users`.`name`,
         `users`.`firstname`,
         `users`.`lastname`
         FROM `eco_cargo_stats`
@@ -226,7 +225,6 @@ ESX.RegisterServerCallback('eco_cargo:getStatistics', function(source, cb)
         `eco_cargo_stats`.`stolen_mission` + `eco_cargo_stats`.`stolen_delivery` as `all_stolen`,
         `eco_cargo_stats`.`goods_quality` / (`eco_cargo_stats`.`started_mission` + `eco_cargo_stats`.`started_delivery`) as `quality_rate`,
         (`eco_cargo_stats`.`done_mission` + `eco_cargo_stats`.`done_delivery`) / (`eco_cargo_stats`.`started_mission` + `eco_cargo_stats`.`started_delivery`) * 100 as `success_rate`,
-        `users`.`name`,
         `users`.`firstname`,
         `users`.`lastname`
         FROM `eco_cargo_stats`
