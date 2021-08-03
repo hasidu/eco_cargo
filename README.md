@@ -13,6 +13,7 @@ https://www.youtube.com/watch?v=Q2TpDI_MPdI
 
 Konvoj videó:
 https://youtu.be/8f7a2wVr2HU
+
 [![Watch the video_1](https://img.youtube.com/vi/8f7a2wVr2HU/sddefault.jpg)](https://youtu.be/8f7a2wVr2HU)
 
 ![ecocargo gallery](https://github.com/Ekhion76/eco_cargo/blob/main/preview_images/eco_cargo_gallery.jpg)
